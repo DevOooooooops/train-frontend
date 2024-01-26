@@ -8,4 +8,5 @@ export const palette = {
   pastelRed: '#ff6361',
   greyDarker: '#989FB3',
   white: '#ffffff',
+  textClassicColor: '#0A1045',
 }
