@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { TouchableOpacity, View } from "react-native"
-import { AppStackScreenProps, navigate } from "app/navigators"
+import { AppStackScreenProps } from "app/navigators"
 import { CQImage } from "app/components/AutoImage/CQImage"
 import { ErrorBoundary } from "app/screens"
 import { CQText } from "app/components/Text/CQText"
@@ -9,6 +9,7 @@ import { palette } from "app/theme/palette"
 import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { RadioButton } from 'react-native-paper';
 
 interface BudgetScreenProps extends AppStackScreenProps<"Budget"> {}
 
@@ -24,6 +25,8 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
     mode: 'all',
     defaultValues: { amount: '' },
   });
+
+  const [currentChecked, setCurrentChecked] = useState('first');
 
   return (
     <ErrorBoundary catchErrors='always'>
@@ -42,7 +45,7 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
         />
         <CQText style={{fontSize: 40, color: palette.black, fontWeight: 'bold', marginTop: 10}} text={"Budget Mode"}></CQText>
       </View>
-      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 70}}>
+      <View style={{ height: 250, width: '100%', alignItems: 'center', marginTop: 70}}>
         <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
           <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
             <MaterialCommunityIcons name='cash' size={33} color={palette.deepPink} />
@@ -62,6 +65,53 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
               />
             )}
           />
+        </View>
+        <View style={{width: '100%', height: 50, marginTop: 10, flexDirection: 'row'}}>
+          <View style={{width: '30%', height: '100%',marginHorizontal: '1.5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+            <RadioButton.Android
+              value="first"
+              status={ currentChecked === 'first' ? 'checked': 'unchecked' }
+              onPress={()=> setCurrentChecked('first')}
+              color={palette.deepPink}
+            />
+            <CQText
+              style={{
+                color: palette.black,
+                fontSize: 16,
+              }}
+              text={'Daily'}
+            />
+          </View>
+          <View style={{width: '30%', height: '100%',marginHorizontal: '2%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+            <RadioButton.Android
+              value="second"
+              status={ currentChecked === 'second' ? 'checked': 'unchecked' }
+              onPress={()=> setCurrentChecked('second')}
+              color={palette.deepPink}
+            />
+            <CQText
+              style={{
+                color: palette.black,
+                fontSize: 16,
+              }}
+              text={'Weekly'}
+            />
+          </View>
+          <View style={{width: '30%', height: '100%',marginHorizontal: '1.5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+            <RadioButton.Android
+              value="third"
+              status={ currentChecked === 'third' ? 'checked': 'unchecked' }
+              onPress={()=> setCurrentChecked('third')}
+              color={palette.deepPink}
+            />
+            <CQText
+              style={{
+                color: palette.black,
+                fontSize: 16,
+              }}
+              text={'Monthly'}
+            />
+          </View>
         </View>
         <View style={{marginVertical: 20, width: '100%', height: 50, justifyContent: 'center', alignItems: 'center'}}>
           <TouchableOpacity
