@@ -11,13 +11,14 @@ import { Controller, useForm } from "react-hook-form"
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import { DatePickerField } from "app/components/DatePicker/DatePicker"
 
 interface RegistrationScreenProps extends AppStackScreenProps<"Registration"> {}
 
 interface RegistrationData {
   username: string;
   password: string;
-  birthdate: string;
+  birthdate: Date;
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
@@ -26,7 +27,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
     formState: { errors },
   } = useForm<RegistrationData>({
     mode: 'all',
-    defaultValues: { username: '', password: '', birthdate: '' },
+    defaultValues: { username: '', password: '', birthdate: new Date() },
   });
 
   return (
@@ -86,19 +87,31 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
             <AntDesignIcon name='calendar' size={35} color={palette.deepPink} />
           </View>
           <Controller
-            control={control}
             name='birthdate'
-            defaultValue=''
-            render={({ field: { onChange, value } }) => (
-              <InputField
-                text={'birthdate'}
-                error={!!errors.birthdate}
-                value={value}
-                onChange={onChange}
-                backgroundColor={palette.white}
-                width={250}
-              />
-            )}
+            control={control}
+            render={({ field: { value, onChange } }) => {
+              return (
+                <DatePickerField
+                  labelText='Birthdate'
+                  isButtonPreset={false}
+                  labelStyle={{ color: palette.greyDarker }}
+                  containerStyle={{
+                    padding: 20,
+                    backgroundColor: palette.white,
+                    borderColor: '#E1E5EF',
+                    borderWidth: 1,
+                  }}
+                  textStyle={{
+                    color: palette.textClassicColor,
+                    marginTop: 20,
+                  }}
+                  dateSeparator='/'
+                  value={value}
+                  onDateChange={onChange}
+                  type={'date'}
+                />
+              );
+            }}
           />
         </View>
         <View style={{width: '100%', justifyContent: 'center', alignItems: 'flex-end'}}>
@@ -134,6 +147,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               justifyContent: 'center',
               flexDirection: 'row',
             }}
+            onPress={() => navigate('Budget')}
           >
             <View style={{ justifyContent: 'center' }}>
               <CQText
