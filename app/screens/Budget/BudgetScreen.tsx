@@ -8,14 +8,12 @@ import { CQText } from "app/components/Text/CQText"
 import { palette } from "app/theme/palette"
 import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
-import IoniconIcon from 'react-native-vector-icons/Ionicons';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface BudgetScreenProps extends AppStackScreenProps<"Budget"> {}
 
 interface BudgetData {
-  username: string;
-  password: string;
+  amount: string;
 }
 
 export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScreen(_props) {
@@ -24,33 +22,39 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
     formState: { errors },
   } = useForm<BudgetData>({
     mode: 'all',
-    defaultValues: { username: '', password: '' },
+    defaultValues: { amount: '' },
   });
 
   return (
     <ErrorBoundary catchErrors='always'>
       <CQImage
-        source={require('assets/images/authentication.png')}
+        source={require('assets/images/budget-bg.png')}
         resizeMode='stretch'
         resizeMethod='auto'
         style={{height: '100%', width: '100%', position: 'absolute' }}
       />
-      <View style={{ height: 170, width: '100%', alignItems: 'center',justifyContent: 'flex-end'}}>
-        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Budget Mode"}></CQText>
+      <View style={{ height: 300, width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end'}}>
+        <CQImage
+          source={require('assets/images/cash-quest-logo.png')}
+          resizeMode='stretch'
+          resizeMethod='auto'
+          style={{height: 100, width: 100 }}
+        />
+        <CQText style={{fontSize: 40, color: palette.black, fontWeight: 'bold', marginTop: 10}} text={"Budget Mode"}></CQText>
       </View>
-      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 150}}>
+      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 70}}>
         <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
           <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
-            <FontAwesomeIcon name='user-o' size={33} color={palette.deepPink} />
+            <MaterialCommunityIcons name='cash' size={33} color={palette.deepPink} />
           </View>
           <Controller
             control={control}
-            name='username'
+            name='amount'
             defaultValue=''
             render={({ field: { onChange, value } }) => (
               <InputField
-                text={'Username'}
-                error={!!errors.username}
+                text={'Amount'}
+                error={!!errors.amount}
                 value={value}
                 onChange={onChange}
                 backgroundColor={palette.white}
@@ -58,49 +62,6 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
               />
             )}
           />
-        </View>
-        <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
-          <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
-            <IoniconIcon name='lock-closed-outline' size={35} color={palette.deepPink} />
-          </View>
-          <Controller
-            control={control}
-            name='password'
-            defaultValue=''
-            render={({ field: { onChange, value } }) => (
-              <InputField
-                text={'Password'}
-                error={!!errors.password}
-                value={value}
-                onChange={onChange}
-                backgroundColor={palette.white}
-                width={250}
-              />
-            )}
-          />
-        </View>
-        <View style={{width: '100%', justifyContent: 'center', alignItems: 'flex-end'}}>
-          <TouchableOpacity
-            style={{
-              width: 200,
-              height: 40,
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              marginRight: 50
-            }}
-            onPress={() => navigate('Registration')}
-          >
-            <CQText
-              style={{
-                color: palette.black,
-                fontSize: 16,
-                textDecorationLine: 'underline',
-              }}
-              text={"Don't have an account? "}
-            />
-
-          </TouchableOpacity>
         </View>
         <View style={{marginVertical: 20, width: '100%', height: 50, justifyContent: 'center', alignItems: 'center'}}>
           <TouchableOpacity
