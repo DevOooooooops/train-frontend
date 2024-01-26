@@ -10,35 +10,37 @@ import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
 interface RegistrationScreenProps extends AppStackScreenProps<"Registration"> {}
 
-interface LoginData {
+interface RegistrationData {
   username: string;
   password: string;
+  birthdate: string;
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
   const {
     control,
     formState: { errors },
-  } = useForm<LoginData>({
+  } = useForm<RegistrationData>({
     mode: 'all',
-    defaultValues: { username: '', password: '' },
+    defaultValues: { username: '', password: '', birthdate: '' },
   });
 
   return (
     <ErrorBoundary catchErrors='always'>
       <CQImage
-        source={require('assets/images/authentication.png')}
+        source={require('assets/images/sign-up-bg.png')}
         resizeMode='stretch'
         resizeMethod='auto'
         style={{height: '100%', width: '100%', position: 'absolute' }}
       />
       <View style={{ height: 170, width: '100%', alignItems: 'center',justifyContent: 'flex-end'}}>
-        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Sign In"}></CQText>
+        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Sign Up"}></CQText>
       </View>
-      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 150}}>
+      <View style={{ height: 400, width: '100%',  alignItems: 'center', marginTop: 150}}>
         <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
           <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
             <FontAwesomeIcon name='user-o' size={33} color={palette.deepPink} />
@@ -71,6 +73,26 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               <InputField
                 text={'Password'}
                 error={!!errors.password}
+                value={value}
+                onChange={onChange}
+                backgroundColor={palette.white}
+                width={250}
+              />
+            )}
+          />
+        </View>
+        <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
+            <AntDesignIcon name='calendar' size={35} color={palette.deepPink} />
+          </View>
+          <Controller
+            control={control}
+            name='birthdate'
+            defaultValue=''
+            render={({ field: { onChange, value } }) => (
+              <InputField
+                text={'birthdate'}
+                error={!!errors.birthdate}
                 value={value}
                 onChange={onChange}
                 backgroundColor={palette.white}
