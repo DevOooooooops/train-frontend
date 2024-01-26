@@ -1,23 +1,22 @@
-import * as React from 'react';
+import * as React from "react"
 import { StyleProp, Text as ReactNativeText, TextStyle } from "react-native"
 
 export interface TextProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 
-  text?: string;
+  text?: string
 
-  style?: StyleProp<TextStyle>;
-
+  style?: StyleProp<TextStyle>
 }
 export function CQText(props: TextProps) {
-  const {text, children, style: styleOverride, ...rest } = props;
-  const content = text || children;
+  const { text, children, style: styleOverride, ...rest } = props
+  const content = text || children
 
-  const styles = [styleOverride];
+  const styles = [styleOverride]
 
   return (
     <ReactNativeText {...rest} style={styles}>
       {content}
     </ReactNativeText>
-  );
+  )
 }

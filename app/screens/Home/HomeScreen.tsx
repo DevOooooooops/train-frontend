@@ -7,9 +7,8 @@ import { View } from "react-native"
 interface HomeScreenProps extends AppStackScreenProps<"Home"> {}
 
 export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen(_props) {
-
   return (
-    <ErrorBoundary catchErrors='always'>
+    <ErrorBoundary catchErrors="always">
       <View></View>
     </ErrorBoundary>
   )

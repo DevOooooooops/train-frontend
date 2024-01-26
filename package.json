@@ -28,7 +28,8 @@
     "bundle:web": "npx expo export --platform web",
     "serve:web": "npx server dist",
     "prebuild:clean": "npx expo prebuild --clean",
-    "prebuild": "npx expo prebuild"
+    "prebuild": "npx expo prebuild",
+    "prettier:write": "prettier --write \"./app/**/*.{tsx,ts}\""
   },
   "dependencies": {
     "@expo-google-fonts/space-grotesk": "^0.2.2",
@@ -98,7 +99,7 @@
     "jest-expo": "49.0.0",
     "patch-package": "6.4.7",
     "postinstall-prepare": "1.0.1",
-    "prettier": "2.8.8",
+    "prettier": "^2.8.8",
     "react-test-renderer": "18.2.0",
     "reactotron-core-client": "^2.8.13",
     "reactotron-mst": "^3.1.7",

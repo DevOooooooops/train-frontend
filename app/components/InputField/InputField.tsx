@@ -1,26 +1,36 @@
-import React from 'react';
-import { KeyboardTypeOptions, View } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React from "react"
+import { KeyboardTypeOptions, View } from "react-native"
+import { TextInput } from "react-native-paper"
 import { palette } from "app/theme/palette"
 
 interface InputFieldProps {
-  text: string;
-  error: boolean;
-  value: string;
-  onChange: ((text: string) => void) & Function;
-  width?: number;
-  backgroundColor: string;
-  rightRender?: boolean;
-  rightText?: string;
-  keyboardType?: KeyboardTypeOptions;
+  text: string
+  error: boolean
+  value: string
+  onChange: ((text: string) => void) & Function
+  width?: number
+  backgroundColor: string
+  rightRender?: boolean
+  rightText?: string
+  keyboardType?: KeyboardTypeOptions
 }
 
-export const InputField = ({ text, error, value, onChange,  width, backgroundColor, rightRender, rightText, keyboardType, }: InputFieldProps) => {
+export const InputField = ({
+  text,
+  error,
+  value,
+  onChange,
+  width,
+  backgroundColor,
+  rightRender,
+  rightText,
+  keyboardType,
+}: InputFieldProps) => {
   return (
     <View>
       <TextInput
-        keyboardType={keyboardType ?? 'default'}
-        autoCapitalize='none'
+        keyboardType={keyboardType ?? "default"}
+        autoCapitalize="none"
         label={text}
         textColor={palette.deepPink}
         selectionColor={palette.deepPink}
@@ -33,7 +43,7 @@ export const InputField = ({ text, error, value, onChange,  width, backgroundCol
               textStyle={{
                 fontSize: 16,
                 color: palette.deepPink,
-                fontFamily: 'Geometria-Bold',
+                fontFamily: "Geometria-Bold",
               }}
             />
           )
@@ -53,5 +63,5 @@ export const InputField = ({ text, error, value, onChange,  width, backgroundCol
         }}
       />
     </View>
-  );
-};
+  )
+}
