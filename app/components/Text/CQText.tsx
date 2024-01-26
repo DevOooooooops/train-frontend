@@ -9,7 +9,7 @@ export interface TextProps {
   style?: StyleProp<TextStyle>;
 
 }
-export function Text(props: TextProps) {
+export function CQText(props: TextProps) {
   const {text, children, style: styleOverride, ...rest } = props;
   const content = text || children;
 
