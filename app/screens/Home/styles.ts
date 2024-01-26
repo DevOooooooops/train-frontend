@@ -9,7 +9,7 @@ export const HEADER_CONTAINER: StyleProp<ViewStyle> = {
   alignItems: 'center',
   padding: 10,
   margin: 10,
-  backgroundColor: palette.solidPink,
+  marginTop: 20,
 };
 
 export const HEADER_TEXT_STACK: StyleProp<ViewStyle> = {
