@@ -23,6 +23,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       <View style={{ height: 170, width: '100%', alignItems: 'center',justifyContent: 'flex-end'}}>
         <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Sign In"}></CQText>
       </View>
+      <View></View>
     </ErrorBoundary>
   )
 })
