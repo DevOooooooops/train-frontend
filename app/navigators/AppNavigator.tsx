@@ -37,6 +37,7 @@ import { colors } from "app/theme"
 export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
+  Registration: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
 }
 
@@ -71,6 +72,7 @@ const AppStack = observer(function AppStack() {
       ) : (
         <>
           <Stack.Screen name="Login" component={Screens.LoginScreen} />
+          <Stack.Screen name="Registration" component={Screens.RegistrationScreen} />
         </>
       )}
 
