@@ -1,8 +1,6 @@
-export * from "./WelcomeScreen"
-
-export * from "./LoginScreen"
-export * from "./DemoCommunityScreen"
-export * from "./DemoDebugScreen"
+export * from "./Login/LoginScreen"
+export * from "./DemoShowroomScreen/DemoCommunityScreen"
+export * from "./DemoShowroomScreen/DemoDebugScreen"
 export * from "./DemoShowroomScreen/DemoShowroomScreen"
 
 export * from "./ErrorScreen/ErrorBoundary"
