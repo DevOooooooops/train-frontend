@@ -38,6 +38,7 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
   Registration: undefined
+  Budget: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
 }
 
@@ -73,6 +74,7 @@ const AppStack = observer(function AppStack() {
         <>
           <Stack.Screen name="Login" component={Screens.LoginScreen} />
           <Stack.Screen name="Registration" component={Screens.RegistrationScreen} />
+          <Stack.Screen name="Budget" component={Screens.BudgetScreen} />
         </>
       )}
 

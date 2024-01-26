@@ -10,38 +10,35 @@ import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import { DatePickerField } from "app/components/DatePicker/DatePicker"
 
-interface RegistrationScreenProps extends AppStackScreenProps<"Registration"> {}
+interface BudgetScreenProps extends AppStackScreenProps<"Budget"> {}
 
-interface RegistrationData {
+interface BudgetData {
   username: string;
   password: string;
-  birthdate: Date;
 }
 
-export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
+export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScreen(_props) {
   const {
     control,
     formState: { errors },
-  } = useForm<RegistrationData>({
+  } = useForm<BudgetData>({
     mode: 'all',
-    defaultValues: { username: '', password: '', birthdate: new Date() },
+    defaultValues: { username: '', password: '' },
   });
 
   return (
     <ErrorBoundary catchErrors='always'>
       <CQImage
-        source={require('assets/images/sign-up-bg.png')}
+        source={require('assets/images/authentication.png')}
         resizeMode='stretch'
         resizeMethod='auto'
         style={{height: '100%', width: '100%', position: 'absolute' }}
       />
       <View style={{ height: 170, width: '100%', alignItems: 'center',justifyContent: 'flex-end'}}>
-        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Sign Up"}></CQText>
+        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Budget Mode"}></CQText>
       </View>
-      <View style={{ height: 400, width: '100%',  alignItems: 'center', marginTop: 150}}>
+      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 150}}>
         <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
           <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
             <FontAwesomeIcon name='user-o' size={33} color={palette.deepPink} />
@@ -82,38 +79,6 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
             )}
           />
         </View>
-        <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
-          <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
-            <AntDesignIcon name='calendar' size={35} color={palette.deepPink} />
-          </View>
-          <Controller
-            name='birthdate'
-            control={control}
-            render={({ field: { value, onChange } }) => {
-              return (
-                <DatePickerField
-                  labelText='Birthdate'
-                  isButtonPreset={false}
-                  labelStyle={{ color: palette.greyDarker }}
-                  containerStyle={{
-                    padding: 20,
-                    backgroundColor: palette.white,
-                    borderColor: '#E1E5EF',
-                    borderWidth: 1,
-                  }}
-                  textStyle={{
-                    color: palette.textClassicColor,
-                    marginTop: 20,
-                  }}
-                  dateSeparator='/'
-                  value={value}
-                  onDateChange={onChange}
-                  type={'date'}
-                />
-              );
-            }}
-          />
-        </View>
         <View style={{width: '100%', justifyContent: 'center', alignItems: 'flex-end'}}>
           <TouchableOpacity
             style={{
@@ -124,15 +89,15 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               alignItems: 'flex-end',
               marginRight: 50
             }}
-            onPress={() => navigate('Login')}
+            onPress={() => navigate('Registration')}
           >
             <CQText
               style={{
                 color: palette.black,
                 fontSize: 16,
-                textDecorationLine: 'underline'
+                textDecorationLine: 'underline',
               }}
-              text={"Already have an account? "}
+              text={"Don't have an account? "}
             />
 
           </TouchableOpacity>
@@ -147,7 +112,6 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               justifyContent: 'center',
               flexDirection: 'row',
             }}
-            onPress={() => navigate('Budget')}
           >
             <View style={{ justifyContent: 'center' }}>
               <CQText
