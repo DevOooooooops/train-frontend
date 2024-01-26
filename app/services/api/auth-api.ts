@@ -1,26 +1,23 @@
-import { Api } from "app/services/api/api"
-import { GetTokenResult } from "app/services/api/api.types"
-import { ApiResponse } from "apisauce"
-import { getGeneralApiProblem } from "app/services/api/apiProblem"
+import { GetTokenResult, GetWhoAmIResult } from "app/services/api/api.types"
+import axios from "axios"
 
 export class AuthApi {
-  private api: Api;
-
-  constructor(api: Api) {
-    this.api = api;
-  }
 
   async getToken(username: string, password: string): Promise<GetTokenResult> {
-    const response: ApiResponse<any> = await this.api.apisauce.post('token', {
+    const response = await axios.post('http://192.168.0.244:8080/token', {
       username: username,
       password: password
     });
-    if (!response.ok) {
-      const problem = getGeneralApiProblem(response);
-      if (problem) throw new Error(problem.kind);
-    }
+    console.tron.log(response);
     const { accessToken } = response.data;
 
     return { accessToken: accessToken };
+  }
+
+  async whoami(token: string): Promise<GetWhoAmIResult> {
+    const response = await axios.post('http://192.168.0.244:8080/whoami', {token: token});
+    console.tron.log(response);
+    const { user } = response.data;
+    return { user: user };
   }
 }
