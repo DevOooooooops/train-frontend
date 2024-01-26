@@ -7,4 +7,5 @@ export const palette = {
   solidPink: '#f3d1ce',
   pastelRed: '#ff6361',
   greyDarker: '#989FB3',
+  white: '#ffffff',
 }

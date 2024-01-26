@@ -8,7 +8,6 @@ interface InputFieldProps {
   error: boolean;
   value: string;
   onChange: ((text: string) => void) & Function;
-  errorMessage: string;
   width?: number;
   backgroundColor: string;
   rightRender?: boolean;
@@ -16,15 +15,15 @@ interface InputFieldProps {
   keyboardType?: KeyboardTypeOptions;
 }
 
-export const InputField = ({ text, error, value, onChange, errorMessage, width, backgroundColor, rightRender, rightText, keyboardType, }: InputFieldProps) => {
+export const InputField = ({ text, error, value, onChange,  width, backgroundColor, rightRender, rightText, keyboardType, }: InputFieldProps) => {
   return (
     <View>
       <TextInput
         keyboardType={keyboardType ?? 'default'}
         autoCapitalize='none'
         label={text}
-        textColor={palette.lightPink}
-        selectionColor={palette.lightPink}
+        textColor={palette.deepPink}
+        selectionColor={palette.deepPink}
         value={value}
         onChangeText={onChange}
         right={
@@ -33,7 +32,7 @@ export const InputField = ({ text, error, value, onChange, errorMessage, width, 
               text={rightText}
               textStyle={{
                 fontSize: 16,
-                color: palette.lightPink,
+                color: palette.deepPink,
                 fontFamily: 'Geometria-Bold',
               }}
             />
@@ -49,7 +48,7 @@ export const InputField = ({ text, error, value, onChange, errorMessage, width, 
         }}
         theme={{
           colors: {
-            primary: palette.lightPink,
+            primary: palette.deepPink,
           },
         }}
       />
