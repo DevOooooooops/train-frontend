@@ -11,14 +11,14 @@ import { Controller, useForm } from "react-hook-form"
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+interface RegistrationScreenProps extends AppStackScreenProps<"Registration"> {}
 
 interface LoginData {
   username: string;
   password: string;
 }
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
   const {
     control,
     formState: { errors },
@@ -89,15 +89,15 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
               alignItems: 'flex-end',
               marginRight: 50
             }}
-            onPress={() => navigate('Registration')}
+            onPress={() => navigate('Login')}
           >
             <CQText
               style={{
                 color: palette.black,
                 fontSize: 16,
-                textDecorationLine: 'underline',
+                textDecorationLine: 'underline'
               }}
-              text={"Don't have an account? "}
+              text={"Already have an account? "}
             />
 
           </TouchableOpacity>
