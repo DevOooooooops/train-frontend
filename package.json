@@ -55,6 +55,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.3",
     "react-native": "0.72.6",
+    "react-native-date-picker": "^4.3.5",
     "react-native-drawer-layout": "4.0.0-alpha.1",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-paper": "^5.12.3",
