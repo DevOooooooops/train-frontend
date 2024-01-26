@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { RootStore, RootStoreModel } from "../RootStore"
+import { RootStore, RootStoreModel } from "../stores/root/RootStore"
 import { setupRootStore } from "./setupRootStore"
 
 /**
