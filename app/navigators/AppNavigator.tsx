@@ -58,8 +58,10 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   const {
-    authenticationStore: { isAuthenticated },
+    authStore: { currentUser, accessToken },
   } = useStores()
+
+  const isAuthenticated = !!accessToken && currentUser
 
   return (
     <Stack.Navigator
