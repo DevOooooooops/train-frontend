@@ -5,7 +5,7 @@ type ImageProps = DefaultImageProps & {
   source: ImageURISource;
 };
 
-export function RenderImage(props: ImageProps) {
+export function CQImage(props: ImageProps) {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
   useLayoutEffect(() => {

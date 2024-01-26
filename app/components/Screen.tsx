@@ -14,6 +14,7 @@ import {
 } from "react-native"
 import { colors } from "../theme"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import { ErrorBoundary } from "app/screens"
 
 interface BaseScreenProps {
   /**
@@ -200,6 +201,7 @@ export function Screen(props: ScreenProps) {
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
 
   return (
+    <ErrorBoundary catchErrors='always'>
     <View style={[$containerStyle, { backgroundColor }, $containerInsets]}>
       <StatusBar style={statusBarStyle} {...StatusBarProps} />
 
@@ -216,6 +218,7 @@ export function Screen(props: ScreenProps) {
         )}
       </KeyboardAvoidingView>
     </View>
+    </ErrorBoundary>
   )
 }
 
