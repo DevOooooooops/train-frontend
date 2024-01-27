@@ -11,7 +11,6 @@ import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import { formatISO, parse } from 'date-fns';
 
 interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 
@@ -32,11 +31,12 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
   });
 
   const onSubmit = (registrationData: RegistrationData) => {
-    const parsedDate = parse(registrationData.birthdate, 'dd/MM/yyyy', new Date());
+    const [day, month, year] = registrationData.birthdate.split('/');
+    const formattedDate = `${year}-${month}-${day}`;
     console.tron.log({
       username: registrationData.username,
       password: registrationData.password,
-      birthdate: formatISO(parsedDate)
+      birthdate: formattedDate
     })
   }
 

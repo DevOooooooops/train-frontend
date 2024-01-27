@@ -1,5 +1,5 @@
 import { GeneralApiProblem } from "app/services/api/apiProblem"
-import { User } from "app/models/entities/user/user"
+import { Account, User } from "app/models/entities/user/user"
 
 /**
  * These types indicate the shape of the data you expect to receive from your
@@ -55,3 +55,5 @@ export interface ApiConfig {
 export type GetTokenResult = { accessToken: string; } | GeneralApiProblem;
 
 export type GetWhoAmIResult = { user: User } | GeneralApiProblem;
+
+export type RegistrationResult = { account: Account }

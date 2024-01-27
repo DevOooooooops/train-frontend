@@ -26,4 +26,6 @@ export class AuthApi {
     const user = response.data;
     return { user: user };
   }
+
+  //async registration(payload: any): Promise<>
 }
