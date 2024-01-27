@@ -80,7 +80,7 @@ export const TRANSACTION_AMOUNT_CONTAINER: View = {
   flexDirection: 'row',
   alignItems: 'center',
   paddingHorizontal: 10,
-  backgroundColor: palette.solidPink,
+  backgroundColor: palette.deepPink,
   borderRadius: 10,
   marginRight: 10,
 };

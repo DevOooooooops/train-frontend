@@ -7,6 +7,8 @@ export * from './Profile/Profile';
 export * from './Registration/RegistrationScreen';
 export * from './Transaction/TransactionScreen';
 export * from './Home/TransactionCreation'
+export * from './Calendar/CalendarScreen'
+export * from './Calendar/StatScreen'
 // export other screens here
 
 export * from './ErrorScreen/ErrorBoundary';
