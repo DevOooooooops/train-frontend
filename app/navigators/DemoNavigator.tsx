@@ -6,7 +6,7 @@ import { TextStyle, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from '../components';
 import { translate } from '../i18n';
-import { DemoCommunityScreen, DemoDebugScreen, TransactionScreen } from '../screens';
+import { CalendarScreen, DemoCommunityScreen, TransactionScreen } from "../screens"
 import { colors, spacing, typography } from '../theme';
 import { AppStackParamList, AppStackScreenProps } from './AppNavigator';
 import FrontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -16,6 +16,7 @@ export type DemoTabParamList = {
   Home: undefined;
   Transaction: undefined;
   DemoCommunity: undefined;
+  Calendar: undefined;
   DemoShowroom: { queryIndex?: string; itemIndex?: string };
   DemoDebug: undefined;
 };
@@ -76,11 +77,11 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name='DemoDebug'
-        component={DemoDebugScreen}
+        name='Calendar'
+        component={CalendarScreen}
         options={{
-          tabBarLabel: translate('demoNavigator.debugTab'),
-          tabBarIcon: ({ focused }) => <Icon icon='debug' color={focused ? colors.tint : undefined} size={30} />,
+          tabBarLabel: 'Calendar',
+          tabBarIcon: ({ focused }) => <FrontAwesome name='calendar' color={focused ? colors.tint : undefined} size={30} />,
         }}
       />
     </Tab.Navigator>
