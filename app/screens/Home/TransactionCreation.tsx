@@ -1,5 +1,5 @@
 
-import { AppStackScreenProps, navigate } from 'app/navigators';
+import { AppStackScreenProps, navigate, navigationRef } from "app/navigators"
 import { ErrorBoundary } from 'app/screens';
 import { palette } from 'app/theme/palette';
 import React, { FC, useEffect } from "react"
@@ -49,6 +49,13 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
     }
     await authStore.createTransaction(item)
     await authStore.getTransaction()
+    await authStore.getUser();
+    // @ts-ignore
+    navigationRef.current.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    });
+    setTimeout(() => navigate('Home'), 1000);
   };
 
   return (

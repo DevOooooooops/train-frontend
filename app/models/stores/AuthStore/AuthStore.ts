@@ -98,6 +98,32 @@ export const AuthStoreModel = types
     }),
   }))
   .actions(self => ({
+    getUser: flow(function* () {
+      const signUpApi = new AuthApi();
+      try {
+        const getUserResult = yield signUpApi.getUser(self.accessToken ?? '')
+        self.setAccount({
+          user:
+            {
+              id: getUserResult.account.user.id,
+              username: getUserResult.account.user.username,
+              birthDate: getUserResult.account.user.birthDate
+            },
+          income:
+            {
+              earningFrequency: getUserResult.account.income.earningFrequency,
+              amount: getUserResult.account.income.amount,
+              savingTarget: getUserResult.account.income.savingTarget
+            },
+          level: getUserResult.account.level,
+          balance: getUserResult.account.balance
+        })
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
     setTransactions(transactions: Transaction[]) {
       self.transactions.replace(transactions);
     },
