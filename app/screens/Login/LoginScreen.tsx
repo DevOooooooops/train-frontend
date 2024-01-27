@@ -7,6 +7,7 @@ import { ErrorBoundary } from 'app/screens';
 import { CQText } from 'app/components/Text/CQText';
 import { palette } from 'app/theme/palette';
 import { InputField } from 'app/components/InputField/InputField';
+import  { PasswordInputField } from 'app/components/InputField/PasswordInputField'
 import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -91,7 +92,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             name='password'
             defaultValue=''
             render={({ field: { onChange, value } }) => (
-              <InputField text={'Password'} error={!!errors.password} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+              <PasswordInputField text={'Password'} error={!!errors.password} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>
