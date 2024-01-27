@@ -71,7 +71,7 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
           </View>
           <View style={ICON_BUTTON_CONTAINER}>
             <View>
-              <TouchableOpacity style={ICON_BUTTON}>
+              <TouchableOpacity style={ICON_BUTTON} onPress={() => navigate('TransactionCreation')}>
                 <IonIcon name='arrow-up' size={20} color={palette.deepPink} />
               </TouchableOpacity>
               <CQText style={BALANCE_TEXT} text={'Deposit'}></CQText>

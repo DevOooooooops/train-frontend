@@ -37,6 +37,7 @@ export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
   Transaction: undefined;
+  TransactionCreation: undefined;
   Demo: NavigatorScreenParams<DemoTabParamList>;
 };
 
@@ -65,6 +66,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name='Demo' component={DemoNavigator} />
           <Stack.Screen name='Profile' component={Screens.ProfileScreen} />
           <Stack.Screen name='Budget' component={Screens.BudgetScreen} />
+          <Stack.Screen name='TransactionCreation' component={Screens.TransactionCreationScreen} />
         </>
       ) : (
         <>
