@@ -2,13 +2,16 @@ import { types } from "mobx-state-tree"
 import { Account, AccountModel, User, UserModel } from "app/models/entities/user/user"
 import { flow } from "mobx"
 import { AuthApi } from "app/services/api/auth-api"
+import { Transaction, TransactionModel } from "app/models/entities/transaction/transaction"
+import { TransactionApi } from "app/services/api/transaction-api"
 
 export const AuthStoreModel = types
   .model('Auth')
   .props({
     accessToken: types.maybeNull(types.string),
     currentUser: types.maybeNull(UserModel),
-    currentAccount: types.maybeNull(AccountModel)
+    currentAccount: types.maybeNull(AccountModel),
+    transactions: types.optional(types.array(TransactionModel), []),
   }).actions(self => ({
     reset: () => {
       self.accessToken = null;
@@ -89,6 +92,22 @@ export const AuthStoreModel = types
           level: getUserResult.account.level,
           balance: getUserResult.account.balance
         })
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
+    sesTransactions(transactions: Transaction[]) {
+      self.transactions.replace(transactions);
+    },
+  }))
+  .actions(self => ({
+    getTransaction: flow(function* (username: string, password: string) {
+      const transactionApi = new TransactionApi();
+      try {
+        const getTokenResult = yield transactionApi.getAll(self.accessToken || '');
+        self.sesTransactions(getTokenResult.data);
       } catch (e) {
         console.tron.log(e);
       }
