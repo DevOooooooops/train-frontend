@@ -63,12 +63,12 @@ const AppStack = observer(function AppStack() {
         <>
           <Stack.Screen name='Demo' component={DemoNavigator} />
           <Stack.Screen name='Profile' component={Screens.ProfileScreen} />
+          <Stack.Screen name='Budget' component={Screens.BudgetScreen} />
         </>
       ) : (
         <>
           <Stack.Screen name='Login' component={Screens.LoginScreen} />
           <Stack.Screen name='Registration' component={Screens.RegistrationScreen} />
-          <Stack.Screen name='Budget' component={Screens.BudgetScreen} />
         </>
       )}
 

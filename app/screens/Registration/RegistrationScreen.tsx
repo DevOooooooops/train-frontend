@@ -11,33 +11,33 @@ import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import { useStores } from "app/models"
 
 interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 
 interface RegistrationData {
   username: string;
   password: string;
-  birthdate: string;
+  birthDate: string;
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
+  const {authStore: {signUp, login}} = useStores();
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<RegistrationData>({
     mode: 'all',
-    defaultValues: { username: '', password: '', birthdate: '' },
+    defaultValues: { username: '', password: '', birthDate: '' },
   });
 
-  const onSubmit = (registrationData: RegistrationData) => {
-    const [day, month, year] = registrationData.birthdate.split('/');
+  const onSubmit = async (registrationData: RegistrationData) => {
+    const [day, month, year] = registrationData.birthDate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
-    console.tron.log({
-      username: registrationData.username,
-      password: registrationData.password,
-      birthdate: formattedDate
-    })
+    await signUp(formattedDate, registrationData.username, registrationData.password)
+    await login(registrationData.username, registrationData.password)
+    navigate('Budget');
   }
 
   return (
@@ -105,7 +105,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
           </View>
           <Controller
             control={control}
-            name='birthdate'
+            name='birthDate'
             rules={{
               pattern: {
                 value: /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/,
@@ -113,7 +113,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <InputField text={'Birthdate'} error={!!errors.birthdate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+              <InputField text={'Birthdate'} error={!!errors.birthDate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>

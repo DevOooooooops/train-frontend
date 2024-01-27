@@ -9,7 +9,7 @@ export enum Frequency {
 export const UserModel = types.model('User').props({
   id: types.maybeNull(types.string),
   username: types.maybeNull(types.string),
-  password: types.maybeNull(types.string),
+  birthDate: types.maybeNull(types.string),
 });
 
 export const IncomeModel = types.model('Income').props({
