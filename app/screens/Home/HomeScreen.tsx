@@ -34,6 +34,7 @@ import {
 } from './styles';
 import { useStores } from 'app/models';
 import { frequencyToLabel } from 'app/utils/frequency-to-label';
+import { CQImage } from "app/components/AutoImage/CQImage"
 
 interface HomeScreenProps extends AppStackScreenProps<'Home'> {}
 
@@ -51,7 +52,14 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
     <ErrorBoundary catchErrors='always'>
       <View>
         <View style={HEADER_CONTAINER}>
-          <View style={HEADER_IMAGE_PROFILE}></View>
+          <View style={HEADER_IMAGE_PROFILE}>
+            <CQImage
+              source={require('assets/images/cash-quest-logo.png')}
+              resizeMode='stretch'
+              resizeMethod='auto'
+              style={{ height: '100%', width: '100%', position: 'absolute' }}
+            />
+          </View>
           <View style={HEADER_TEXT_STACK}>
             <CQText style={HEADER_SUB_NAME} text={'To be the best...'}></CQText>
             <CQText style={HEADER_NAME} text={currentUser?.username || ''}></CQText>
