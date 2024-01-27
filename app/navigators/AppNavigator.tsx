@@ -37,7 +37,7 @@ export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
   Transaction: undefined;
-  TransactionCreation: undefined;
+  TransactionCreation: { type: string };
   Demo: NavigatorScreenParams<DemoTabParamList>;
 };
 

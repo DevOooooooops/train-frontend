@@ -2,7 +2,7 @@
 import { AppStackScreenProps, navigate } from 'app/navigators';
 import { ErrorBoundary } from 'app/screens';
 import { palette } from 'app/theme/palette';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from "react"
 import { Modal, TouchableOpacity, View } from "react-native"
 import { useStores } from 'app/models';
 import { CQText } from "app/components/Text/CQText"
@@ -10,6 +10,7 @@ import { Controller, useForm } from "react-hook-form"
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"
 import { InputField } from "app/components/InputField/InputField"
 import EntypoIcon from 'react-native-vector-icons/Entypo';
+import { useRoute } from "@react-navigation/native"
 
 interface TransactionData {
   amount: string;
@@ -19,6 +20,9 @@ interface TransactionData {
 interface TransactionCreationScreenProps extends AppStackScreenProps<'TransactionCreation'> {}
 
 export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _props => {
+  const routes = useRoute()
+  // @ts-ignore
+  const { type } = routes?.params || {};
   const {
     authStore: { currentAccount, currentUser },
   } = useStores();
@@ -31,6 +35,10 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
     mode: 'all',
     defaultValues: { amount: '0', reason: '' },
   });
+
+  useEffect(() => {
+    console.tron.log(type)
+  }, [])
 
   const onSubmit = async (transactionalData: TransactionData) => {
     //await authStore.login(loginData.username, loginData.password);
@@ -68,7 +76,7 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
                       fontSize: 16,
                       marginLeft: 10
                     }}
-                    text={'Income'}
+                    text={type ?? ''}
                   />
                 </View>
               </View>
@@ -131,7 +139,7 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
                     justifyContent: 'center',
                     flexDirection: 'row',
                   }}
-                  // onPress={onClose}
+                  onPress={() => navigate('Home')}
                 >
                   <View style={{ justifyContent: 'center' }}>
                     <CQText
@@ -152,6 +160,7 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
                     justifyContent: 'center',
                     flexDirection: 'row',
                   }}
+                  onPress={handleSubmit(onSubmit)}
                 >
                   <View style={{ justifyContent: 'center' }}>
                     <CQText
