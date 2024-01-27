@@ -8,7 +8,20 @@ export const AuthStoreModel = types
   .props({
     accessToken: types.maybeNull(types.string),
     currentUser: types.maybeNull(UserModel),
-  }).actions((self) => ({
+  }).actions(self => ({
+    reset: () => {
+      self.accessToken = null;
+      self.currentUser = null;
+    },
+  })).actions(self => ({
+    catchOrThrow: (error: Error) => {
+      const errorMessage = error.message;
+
+      if (errorMessage === 'forbidden') {
+        return self.reset();
+      }
+    },
+  })).actions((self) => ({
     setAccessToken(token: string) {
       self.accessToken = token;
     },
@@ -16,6 +29,10 @@ export const AuthStoreModel = types
     setUser(user: User) {
       self.currentUser = user;
     },
+  })).actions(self => ({
+    logout: flow(function* () {
+      self.reset();
+    }),
   })).actions(self => ({
     login: flow(function* (username: string, password: string) {
       const signInApi = new AuthApi();
