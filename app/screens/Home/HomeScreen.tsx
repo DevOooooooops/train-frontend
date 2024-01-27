@@ -97,7 +97,7 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
           </View>
           <View style={ADDITIONAL_INFO_BOX}>
             <CQText style={BALANCE_TEXT} text={'Goal'}></CQText>
-            <CQText style={BUDGET_MODE_VALUE} text={'$ 250.000'}></CQText>
+            <CQText style={BUDGET_MODE_VALUE} text={`$ ${currentAccount?.income?.savingTarget || '00.00'}`}></CQText>
           </View>
         </View>
         <View style={LEVEL_CONTAINER}>
