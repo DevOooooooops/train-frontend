@@ -20,6 +20,7 @@ import {
   DECORATION_LARGE,
   DECORATION_MID,
   DECORATION_MIN,
+  FLAG_ICON,
   HEADER_CONTAINER,
   HEADER_IMAGE_PROFILE,
   HEADER_NAME,
@@ -28,12 +29,19 @@ import {
   HEADER_TEXT_STACK,
   ICON_BUTTON,
   ICON_BUTTON_CONTAINER,
+  LEVEL_CONTAINER,
+  LEVEL_VALUE,
 } from './styles';
+import { useStores } from 'app/models';
+import { frequencyToLabel } from 'app/utils/frequency-to-label';
 
 interface HomeScreenProps extends AppStackScreenProps<'Home'> {}
 
-export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
+export const HomeScreen: FC<HomeScreenProps> = _props => {
   const gotToProfile = () => navigate('Profile');
+  const {
+    authStore: { currentAccount, currentUser },
+  } = useStores();
 
   return (
     <ErrorBoundary catchErrors='always'>
@@ -42,7 +50,7 @@ export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
           <View style={HEADER_IMAGE_PROFILE}></View>
           <View style={HEADER_TEXT_STACK}>
             <CQText style={HEADER_SUB_NAME} text={'To be the best...'}></CQText>
-            <CQText style={HEADER_NAME} text={'John Doe'}></CQText>
+            <CQText style={HEADER_NAME} text={currentUser?.username || ''}></CQText>
           </View>
           <TouchableOpacity onPress={gotToProfile} style={HEADER_PROFILE_BUTTON}>
             <IonIcon name='chevron-forward-sharp' size={20} />
@@ -55,7 +63,7 @@ export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
               <CQText style={BALANCE_TEXT} text={'Your current balance'}></CQText>
             </View>
             <View style={BALANCE_CARD_VALUE_CONTAINER}>
-              <CQText style={BALANCE_VALUE} text={'$ 250.00'}></CQText>
+              <CQText style={BALANCE_VALUE} text={`$ ${currentAccount?.balance || '00.00'}`}></CQText>
               <TouchableOpacity>
                 <IonIcon name='eye-off-outline' size={20} color='#fff' />
               </TouchableOpacity>
@@ -83,13 +91,20 @@ export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
           <View style={ADDITIONAL_INFO_BOX}>
             <CQText style={BALANCE_TEXT} text={'Budget mode'}></CQText>
             <View style={ADDITIONAL_INFO_BOX_1}>
-              <CQText style={BUDGET_MODE_VALUE} text={'20%'}></CQText>
-              <CQText style={BALANCE_TEXT} text={' / Per Month'}></CQText>
+              <CQText style={BUDGET_MODE_VALUE} text={`${currentAccount?.income?.savingTarget || '0'}%`}></CQText>
+              <CQText style={BALANCE_TEXT} text={frequencyToLabel(currentAccount?.income?.earningFrequency)}></CQText>
             </View>
           </View>
           <View style={ADDITIONAL_INFO_BOX}>
             <CQText style={BALANCE_TEXT} text={'Goal'}></CQText>
             <CQText style={BUDGET_MODE_VALUE} text={'$ 250.000'}></CQText>
+          </View>
+        </View>
+        <View style={LEVEL_CONTAINER}>
+          <CQText style={BALANCE_TEXT} text='Your current level'></CQText>
+          <CQText style={LEVEL_VALUE} text={`${currentAccount?.level || '1'}`}></CQText>
+          <View style={FLAG_ICON}>
+            <IonIcon size={70} name='flag' color={palette.white} />
           </View>
         </View>
       </View>

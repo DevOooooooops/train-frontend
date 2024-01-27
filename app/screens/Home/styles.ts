@@ -1,6 +1,12 @@
 import { palette } from 'app/theme/palette';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
+const FULL_WIDTH_WITH_MARGIN: StyleProp<ViewStyle> = {
+  marginLeft: '4%',
+  marginRight: '4%',
+  width: '92%',
+};
+
 export const HEADER_CONTAINER: StyleProp<ViewStyle> = {
   height: 80,
   display: 'flex',
@@ -130,6 +136,20 @@ export const ICON_BUTTON_ICON: StyleProp<TextStyle> = {
   color: palette.deepPink,
 };
 
+export const BOX_SHADOW: StyleProp<ViewStyle> = {
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.23,
+  shadowRadius: 2.62,
+  elevation: 4,
+  position: 'relative',
+  borderRadius: 10,
+  padding: 10,
+};
+
 export const ICON_BUTTON_CONTAINER: StyleProp<ViewStyle> = {
   display: 'flex',
   justifyContent: 'space-around',
@@ -146,6 +166,7 @@ export const ADDITIONAL_INFO_CONTAINER: StyleProp<ViewStyle> = {
   justifyContent: 'space-between',
   width: '92%',
   margin: '4%',
+  marginTop: 0,
   flexDirection: 'row',
 };
 
@@ -156,17 +177,7 @@ export const ADDITIONAL_INFO_BOX: StyleProp<ViewStyle> = {
   flexBasis: '47%',
   height: 100,
   backgroundColor: palette.deepPink,
-  shadowColor: '#000',
-  shadowOffset: {
-    width: 0,
-    height: 2,
-  },
-  shadowOpacity: 0.23,
-  shadowRadius: 2.62,
-  elevation: 4,
-  position: 'relative',
-  borderRadius: 10,
-  padding: 10,
+  ...BOX_SHADOW,
 };
 
 export const ADDITIONAL_INFO_BOX_1: StyleProp<ViewStyle> = {
@@ -180,4 +191,32 @@ export const BUDGET_MODE_VALUE: StyleProp<TextStyle> = {
   fontWeight: 'bold',
   color: palette.white,
   marginLeft: 2,
+};
+
+export const LEVEL_CONTAINER: StyleProp<ViewStyle> = {
+  ...FULL_WIDTH_WITH_MARGIN,
+  height: 100,
+  padding: 10,
+  position: 'relative',
+  backgroundColor: palette.deepPink,
+  ...BOX_SHADOW,
+};
+
+export const LEVEL_VALUE: StyleProp<ViewStyle> = {
+  ...BUDGET_MODE_VALUE,
+  position: 'absolute',
+  bottom: 10,
+  left: 10,
+};
+
+export const FLAG_ICON: StyleProp<ViewStyle> = {
+  width: '100%',
+  height: 100,
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
 };

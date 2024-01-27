@@ -7,8 +7,6 @@ import { FC } from 'react';
 import { View } from 'react-native';
 import { ErrorBoundary } from '../ErrorScreen/ErrorBoundary';
 import { BACKGROUND_IMAGE, PROFILE_PICTURE, PROFILE_PICTURE_CONTAINER, USERNAME } from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { palette } from 'app/theme/palette';
 
 const bgImageSource = require('assets/images/profile-bg.png');
 const logoImageSource = require('assets/images/cash-quest-logo.png');
@@ -17,7 +15,7 @@ interface ProfileScreenProps extends AppStackScreenProps<'Profile'> {}
 
 export const ProfileScreen: FC<ProfileScreenProps> = _props => {
   const {
-    authStore: { currentUser },
+    authStore: { currentUser, logout },
   } = useStores();
 
   return (
@@ -31,7 +29,7 @@ export const ProfileScreen: FC<ProfileScreenProps> = _props => {
         <CQListItem leftIcon='user' title='Edit profile' />
         <CQListItem leftIcon='setting' title='Preferences' />
         <CQListItem leftIcon='question' title='Help' />
-        <CQListItem leftIcon='logout' title='Logout' />
+        <CQListItem leftIcon='logout' title='Logout' onPress={logout} />
       </View>
     </ErrorBoundary>
   );
