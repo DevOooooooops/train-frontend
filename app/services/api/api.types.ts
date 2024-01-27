@@ -1,6 +1,7 @@
 import { GeneralApiProblem } from 'app/services/api/apiProblem';
 import { Account, User } from 'app/models/entities/user/user';
-import { Transaction } from "app/models/entities/transaction/transaction"
+import { Transaction } from 'app/models/entities/transaction/transaction';
+import { Quest } from 'app/models/entities/quest/Quest';
 
 /**
  * These types indicate the shape of the data you expect to receive from your
@@ -59,6 +60,6 @@ export type GetWhoAmIResult = { user: User } | GeneralApiProblem;
 
 export type GetUserResult = { account: Account } | GeneralApiProblem;
 
-export type GetTransactionResult = {transaction: Transaction[] } | GeneralApiProblem;
+export type GetTransactionResult = { transaction: Transaction[] } | GeneralApiProblem;
 
-export type ApiResult<T> = Promise<{ data: T } | GeneralApiProblem>;
+export type GetQuestResult = { quests: Quest[] } | GeneralApiProblem;
