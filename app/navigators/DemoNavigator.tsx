@@ -1,17 +1,16 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { HomeScreen } from 'app/screens/Home/HomeScreen';
+import { QuestScreen } from 'app/screens/Quest/QuestScreen';
+import { palette } from 'app/theme/palette';
 import React from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import FrontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Icon } from '../components';
-import { translate } from '../i18n';
-import { CalendarScreen, DemoCommunityScreen, TransactionScreen } from "../screens"
+import { CalendarScreen, TransactionScreen } from '../screens';
 import { colors, spacing, typography } from '../theme';
 import { AppStackParamList, AppStackScreenProps } from './AppNavigator';
-import FrontAwesome from 'react-native-vector-icons/FontAwesome';
-import { palette } from 'app/theme/palette';
-import { QuestScreen } from 'app/screens/Quest/QuestScreen';
 
 export type DemoTabParamList = {
   Home: undefined;
