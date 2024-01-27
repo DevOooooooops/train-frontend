@@ -66,15 +66,15 @@ export const AuthStoreModel = types
         self.setAccount({
           user:
             {
-              id: getUserResult.account.id,
-              username: getUserResult.account.username,
-              password: getUserResult.account.password
+              id: getUserResult.account.user.id,
+              username: getUserResult.account.user.username,
+              password: getUserResult.account.user.password
             },
           income:
             {
-              earningFrequency: getUserResult.account.earningFrequency,
-              amount: getUserResult.account.amount,
-              savingTarget: getUserResult.account.savingTarget
+              earningFrequency: getUserResult.account.income.earningFrequency,
+              amount: getUserResult.account.income.amount,
+              savingTarget: getUserResult.account.income.savingTarget
             },
           level: getUserResult.account.level,
           balance: getUserResult.account.balance

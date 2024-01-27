@@ -22,7 +22,7 @@ interface RegistrationData {
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
-  const {authStore: {signUp}} = useStores();
+  const {authStore: {signUp, login}} = useStores();
   const {
     handleSubmit,
     control,
@@ -36,6 +36,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
     const [day, month, year] = registrationData.birthdate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
     await signUp(formattedDate, registrationData.username, registrationData.password)
+    await login(registrationData.username, registrationData.password)
     navigate('Budget');
   }
 
