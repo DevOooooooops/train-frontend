@@ -56,4 +56,4 @@ export type GetTokenResult = { accessToken: string; } | GeneralApiProblem;
 
 export type GetWhoAmIResult = { user: User } | GeneralApiProblem;
 
-export type RegistrationResult = { account: Account }
+export type GetUserResult = { account: Account } | GeneralApiProblem;
