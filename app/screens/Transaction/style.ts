@@ -75,6 +75,7 @@ export const TRANSACTION_CARD_CONTAINER: View = {
 
 export const TRANSACTION_AMOUNT_CONTAINER: View = {
   height: '100%',
+  width: 130,
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',

@@ -42,6 +42,11 @@ export const AuthStoreModel = types
     logout: flow(function* () {
       self.reset();
     }),
+  }))
+  .actions(self => ({
+    setTransactions(transactions: Transaction[]) {
+      self.transactions.replace(transactions);
+    },
   })).actions(self => ({
     signUp: flow(function* (birthdate: string, username: string, password: string) {
       const signUpApi = new AuthApi();
@@ -92,6 +97,14 @@ export const AuthStoreModel = types
           level: getUserResult.account.level,
           balance: getUserResult.account.balance
         })
+        const transactionApi = new TransactionApi();
+        const getTransactionResult = yield transactionApi.getTransactions(self.accessToken || '');
+        try {
+          self.setTransactions(getTransactionResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
       } catch (e) {
         console.tron.log(e);
       }
@@ -118,22 +131,30 @@ export const AuthStoreModel = types
           level: getUserResult.account.level,
           balance: getUserResult.account.balance
         })
+        const transactionApi = new TransactionApi();
+        const getTransactionResult = yield transactionApi.getTransactions(self.accessToken || '');
+        try {
+          self.setTransactions(getTransactionResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
       } catch (e) {
         console.tron.log(e);
       }
     }),
   }))
   .actions(self => ({
-    setTransactions(transactions: Transaction[]) {
-      self.transactions.replace(transactions);
-    },
-  }))
-  .actions(self => ({
     getTransaction: flow(function* () {
       const transactionApi = new TransactionApi();
       try {
         const getTokenResult = yield transactionApi.getTransactions(self.accessToken || '');
-        self.setTransactions(getTokenResult.transaction);
+        try {
+          self.setTransactions(getTokenResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
       } catch (e) {
         console.tron.log(e);
       }

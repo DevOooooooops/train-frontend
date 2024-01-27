@@ -1,5 +1,5 @@
 import { CQText } from 'app/components/Text/CQText';
-import { AppStackScreenProps, navigate, navigationRef } from "app/navigators"
+import { AppStackScreenProps, navigate } from "app/navigators"
 import { ErrorBoundary } from 'app/screens';
 import { palette } from 'app/theme/palette';
 import React, { FC, useEffect } from "react"
@@ -40,7 +40,7 @@ interface HomeScreenProps extends AppStackScreenProps<'Home'> {}
 export const HomeScreen: FC<HomeScreenProps> = _props => {
   const gotToProfile = () => navigate('Profile');
   const { authStore } = useStores();
-
+  const {currentUser, currentAccount} = authStore
   useEffect(() => {
     (async () => {
       await authStore.getUser()
@@ -54,7 +54,7 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
           <View style={HEADER_IMAGE_PROFILE}></View>
           <View style={HEADER_TEXT_STACK}>
             <CQText style={HEADER_SUB_NAME} text={'To be the best...'}></CQText>
-            <CQText style={HEADER_NAME} text={authStore.currentUser?.username || ''}></CQText>
+            <CQText style={HEADER_NAME} text={currentUser?.username || ''}></CQText>
           </View>
           <TouchableOpacity onPress={gotToProfile} style={HEADER_PROFILE_BUTTON}>
             <IonIcon name='chevron-forward-sharp' size={20} />
@@ -67,7 +67,7 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
               <CQText style={BALANCE_TEXT} text={'Your current balance'}></CQText>
             </View>
             <View style={BALANCE_CARD_VALUE_CONTAINER}>
-              <CQText style={BALANCE_VALUE} text={`$ ${authStore.currentAccount?.balance ?? '00.00'}`}></CQText>
+              <CQText style={BALANCE_VALUE} text={`$ ${currentAccount?.balance ?? '00.00'}`}></CQText>
               <TouchableOpacity>
                 <IonIcon name='eye-off-outline' size={20} color='#fff' />
               </TouchableOpacity>
@@ -95,18 +95,18 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
           <View style={ADDITIONAL_INFO_BOX}>
             <CQText style={BALANCE_TEXT} text={'Budget mode'}></CQText>
             <View style={ADDITIONAL_INFO_BOX_1}>
-              <CQText style={BUDGET_MODE_VALUE} text={`${authStore.currentAccount?.income?.savingTarget || '0'}%`}></CQText>
-              <CQText style={BALANCE_TEXT} text={frequencyToLabel(authStore.currentAccount?.income?.earningFrequency)}></CQText>
+              <CQText style={BUDGET_MODE_VALUE} text={`${currentAccount?.income?.savingTarget || '0'}%`}></CQText>
+              <CQText style={BALANCE_TEXT} text={frequencyToLabel(currentAccount?.income?.earningFrequency)}></CQText>
             </View>
           </View>
           <View style={ADDITIONAL_INFO_BOX}>
             <CQText style={BALANCE_TEXT} text={'Goal'}></CQText>
-            <CQText style={BUDGET_MODE_VALUE} text={`$ ${authStore.currentAccount?.income?.savingTarget || '00.00'}`}></CQText>
+            <CQText style={BUDGET_MODE_VALUE} text={`$ ${currentAccount?.income?.savingTarget || '00.00'}`}></CQText>
           </View>
         </View>
         <View style={LEVEL_CONTAINER}>
           <CQText style={BALANCE_TEXT} text='Your current level'></CQText>
-          <CQText style={LEVEL_VALUE} text={`${authStore.currentAccount?.level || '1'}`}></CQText>
+          <CQText style={LEVEL_VALUE} text={`${currentAccount?.level || '1'}`}></CQText>
           <View style={FLAG_ICON}>
             <IonIcon size={70} name='flag' color={palette.white} />
           </View>
