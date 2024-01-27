@@ -68,9 +68,6 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
             </View>
             <View style={BALANCE_CARD_VALUE_CONTAINER}>
               <CQText style={BALANCE_VALUE} text={`$ ${currentAccount?.balance ?? '00.00'}`}></CQText>
-              <TouchableOpacity>
-                <IonIcon name='eye-off-outline' size={20} color='#fff' />
-              </TouchableOpacity>
             </View>
           </View>
           <View style={ICON_BUTTON_CONTAINER}>

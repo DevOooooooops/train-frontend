@@ -12,6 +12,7 @@ import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import { useStores } from "app/models"
+import { PasswordInputField } from "app/components/InputField/PasswordInputField"
 
 interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 
@@ -88,7 +89,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
             name='password'
             defaultValue=''
             render={({ field: { onChange, value } }) => (
-              <InputField text={'Password'} error={!!errors.password} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+              <PasswordInputField text={'Password'} error={!!errors.password} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>
@@ -113,7 +114,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <InputField text={'Birthdate'} error={!!errors.birthDate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+              <InputField text={'Birthdate (dd/MM/yyyy)'} error={!!errors.birthDate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>

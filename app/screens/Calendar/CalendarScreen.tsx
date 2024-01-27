@@ -24,10 +24,10 @@ export const CalendarScreen: FC<CalendarScreenProps> = _props => {
           resizeMethod='auto'
           style={{ height: '100%', width: '100%', position: 'absolute' }}
         />
-        <View style={{ height: 130, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <CQText style={{ fontSize: 40, color: palette.black, fontWeight: 'bold' }} text={'Calendar'}></CQText>
+        <View style={{ height: 230, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <CQText style={{ fontSize: 40, color: palette.black, fontWeight: 'bold' }} text={'Calendar'} />
         </View>
-        <View style={{ width: '100%', height: 350, marginTop: 40}}>
+        <View style={{ width: '100%', height: 150, marginTop: 40}}>
           <WeekCalendar
             initialDate={'2024-01-27'}
             minDate={'2024-01-31'}
@@ -70,8 +70,8 @@ export const CalendarScreen: FC<CalendarScreenProps> = _props => {
             }}
           />
         </View>
-        <View style={{width: '100%', height: 100, justifyContent: 'space-evenly', paddingLeft: 30}}>
-
+        <View style={{width: '100%', height: 100, justifyContent: 'center', alignItems: 'center'}}>
+          <CQText style={{ fontSize: 24, color: palette.lighterBlack}} text={'Click to track your daily stat'} />
         </View>
       </View>
       </CalendarProvider>
