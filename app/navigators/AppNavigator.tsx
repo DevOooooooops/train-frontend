@@ -11,10 +11,10 @@ import React from 'react';
 import { useColorScheme } from 'react-native';
 import * as Screens from 'app/screens';
 import Config from '../config';
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator"
-import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
-import { colors } from "app/theme"
-import { useStores } from "app/models"
+import { DemoNavigator, DemoTabParamList } from './DemoNavigator';
+import { navigationRef, useBackButtonHandler } from './navigationUtilities';
+import { colors } from 'app/theme';
+import { useStores } from 'app/models';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -53,9 +53,9 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 const AppStack = observer(function AppStack() {
   const {
     authStore: { currentUser, accessToken },
-  } = useStores()
+  } = useStores();
 
-  const isAuthenticated = !!accessToken && currentUser
+  const isAuthenticated = !!accessToken && currentUser;
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, navigationBarColor: colors.background }} initialRouteName={isAuthenticated ? 'Welcome' : 'Login'}>
