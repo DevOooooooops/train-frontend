@@ -1,3 +1,6 @@
+import { GeneralApiProblem } from "app/services/api/apiProblem"
+import { User } from "app/models/entities/user/user"
+
 /**
  * These types indicate the shape of the data you expect to receive from your
  * API endpoint, assuming it's a JSON object like we have.
@@ -48,3 +51,7 @@ export interface ApiConfig {
    */
   timeout: number
 }
+
+export type GetTokenResult = { accessToken: string; } | GeneralApiProblem;
+
+export type GetWhoAmIResult = { user: User } | GeneralApiProblem;

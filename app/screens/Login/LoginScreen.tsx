@@ -10,6 +10,7 @@ import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { useStores } from "app/models"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -19,13 +20,20 @@ interface LoginData {
 }
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+  const {authStore} = useStores();
   const {
+    handleSubmit,
     control,
     formState: { errors },
   } = useForm<LoginData>({
     mode: 'all',
     defaultValues: { username: '', password: '' },
   });
+
+  const onSubmit = async (loginData: LoginData) => {
+    console.tron.log(loginData)
+    await authStore.login(loginData.username, loginData.password)
+  }
 
   return (
     <ErrorBoundary catchErrors='always'>
@@ -112,6 +120,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
               justifyContent: 'center',
               flexDirection: 'row',
             }}
+            onPress={handleSubmit(onSubmit)}
           >
             <View style={{ justifyContent: 'center' }}>
               <CQText
