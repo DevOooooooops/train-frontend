@@ -63,8 +63,8 @@ export const QuestScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            {questHistory.map(history => (
-              <View style={{ backgroundColor: palette.greyDarker, marginVertical: 10, padding: 10, borderRadius: 10, width: '100%' }}>
+            {questHistory.map((history, k) => (
+              <View key={k} style={{ backgroundColor: palette.greyDarker, marginVertical: 10, padding: 10, borderRadius: 10, width: '100%' }}>
                 <Text style={HEADER_TITLE}>{history?.quest?.name}</Text>
                 <Text style={{ fontSize: 16, color: palette.white }}>{history?.quest?.objectiveDescription}</Text>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 10 }}>
