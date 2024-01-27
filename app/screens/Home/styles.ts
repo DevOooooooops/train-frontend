@@ -14,6 +14,7 @@ export const HEADER_CONTAINER: StyleProp<ViewStyle> = {
 
 export const HEADER_TEXT_STACK: StyleProp<ViewStyle> = {
   display: 'flex',
+  flexGrow: 2,
   flexDirection: 'column',
 };
 
@@ -73,6 +74,13 @@ export const BALANCE_CARD_VALUE_CONTAINER: StyleProp<ViewStyle> = {
 
 export const HEADER_SUB_NAME: StyleProp<TextStyle> = { fontSize: 16, color: palette.greyDarker };
 export const HEADER_NAME: StyleProp<TextStyle> = { fontSize: 24, color: palette.black, fontWeight: 'bold' };
+
+export const HEADER_PROFILE_BUTTON: StyleProp<ViewStyle> = {
+  width: 50,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 const DECORATION: StyleProp<ViewStyle> = {
   backgroundColor: palette.white,

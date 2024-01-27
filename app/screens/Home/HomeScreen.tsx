@@ -23,6 +23,7 @@ import {
   HEADER_CONTAINER,
   HEADER_IMAGE_PROFILE,
   HEADER_NAME,
+  HEADER_PROFILE_BUTTON,
   HEADER_SUB_NAME,
   HEADER_TEXT_STACK,
   ICON_BUTTON,
@@ -41,6 +42,9 @@ export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
             <CQText style={HEADER_SUB_NAME} text={'To be the best...'}></CQText>
             <CQText style={HEADER_NAME} text={'John Doe'}></CQText>
           </View>
+          <TouchableOpacity style={HEADER_PROFILE_BUTTON}>
+            <IonIcon name='chevron-forward-sharp' size={20} />
+          </TouchableOpacity>
         </View>
         <View style={BALANCE_CARD}>
           <View style={BALANCE_CONTAINER}>
