@@ -63,6 +63,6 @@ export type GetUserResult = { account: Account } | GeneralApiProblem;
 
 export type GetTransactionResult = { transaction: Transaction[] } | GeneralApiProblem;
 
-export type GetQuestResult = { quests: Quest[] } | GeneralApiProblem;
+export type GetQuestResult = { quest: Quest } | GeneralApiProblem;
 
 export type GetQuestHistoryResult = { questHistories: QuestHistory[] } | GeneralApiProblem;

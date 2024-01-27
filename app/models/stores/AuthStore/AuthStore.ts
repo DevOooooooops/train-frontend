@@ -64,6 +64,8 @@ export const AuthStoreModel = types
     setQuest(quest: Quest) {
       self.currentQuest = quest;
     },
+  }))
+  .actions(self => ({
     setQuestHistory(questHistory: QuestHistory[]) {
       self.questHistory.replace(questHistory);
     },
@@ -164,10 +166,32 @@ export const AuthStoreModel = types
     }),
   }))
   .actions(self => ({
+    getQuest: flow(function* () {
+      const questApi = new QuestApi();
+      const res = yield questApi.getQuest(self.accessToken ?? '', self.currentAccount?.level || 1);
+      try {
+        self.setQuest(res.quest);
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+    getQuestHistory: flow(function* () {
+      const questHistoryApi = new QuestHistoryApi();
+      try {
+        const res = yield questHistoryApi.getAll(self.accessToken ?? '', self.currentUser?.id || '');
+        self.setQuestHistory(res.questHistories);
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
     getTransaction: flow(function* () {
       const transactionApi = new TransactionApi();
       try {
         const getTokenResult = yield transactionApi.getTransactions(self.accessToken || '');
+        yield self.getQuest();
+        yield self.getQuestHistory();
         try {
           self.setTransactions(getTokenResult.transaction);
         } catch (e) {
@@ -184,24 +208,6 @@ export const AuthStoreModel = types
       const transactionApi = new TransactionApi();
       try {
         yield transactionApi.createTransaction(self.accessToken ?? '', transactionData);
-      } catch (e) {
-        console.tron.log(e);
-      }
-    }),
-  }))
-  .actions(self => ({
-    getQuest: flow(function* () {
-      const questApi = new QuestApi();
-      try {
-        yield questApi.getQuest(self.accessToken ?? '', self.currentAccount?.level || 1);
-      } catch (e) {
-        console.tron.log(e);
-      }
-    }),
-    getQuestHistory: flow(function* () {
-      const questHistoryApi = new QuestHistoryApi();
-      try {
-        yield questHistoryApi.getAll(self.accessToken ?? '', self.currentUser?.id || '');
       } catch (e) {
         console.tron.log(e);
       }
