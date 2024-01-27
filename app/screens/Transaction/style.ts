@@ -36,9 +36,9 @@ export const CONTAINER: View = {
 };
 
 export const SCROLL_VIEW: View = {
-  height: '90%',
   width: '100%',
   overflow: 'scroll',
+  marginBottom: 150,
 };
 
 export const HEADER: View = {
@@ -56,8 +56,10 @@ export const TITLE: Text = {
 
 export const TRANSACTION_CARD_CONTAINER: View = {
   ...FULL_WIDTH_WITH_MARGIN,
+  display: 'flex',
+  flexDirection: 'row',
   height: 100,
-  marginTop: 10,
+  marginBottom: 10,
   shadowColor: '#000',
   shadowOffset: {
     width: 0,
@@ -76,10 +78,43 @@ export const TRANSACTION_AMOUNT_CONTAINER: View = {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  paddingHorizontal: 20,
+  paddingHorizontal: 10,
+  backgroundColor: palette.solidPink,
+  borderRadius: 10,
+  marginRight: 10,
 };
 
 export const TRANSACTION_AMOUNT_VALUE: Text = {
   fontSize: 24,
   fontWeight: 'bold',
+  marginRight: 5,
+  color: palette.black,
+};
+
+export const TRANSACTION_INFO_CONTAINER: View = {
+  height: '100%',
+  flexGrow: 2,
+  paddingVertical: 5,
+  maxWidth: '60%',
+};
+
+export const TRANSACTION_INFO_DATE: Text = {
+  fontSize: 16,
+  opacity: 0.5,
+  color: palette.darkBlack,
+};
+
+export const TRANSACTION_INFO_REASON: Text = {
+  fontSize: 16,
+  marginTop: 5,
+  color: palette.black,
+  flexWrap: 'wrap',
+};
+
+export const TRANSACTION_AMOUNT_STATUS_CONTAINER: View = {
+  height: '100%',
+  width: 50,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
