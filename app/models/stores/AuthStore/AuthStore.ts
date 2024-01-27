@@ -8,6 +8,7 @@ import { Quest, QuestModel } from 'app/models/entities/quest/Quest';
 import { QuestHistory, QuestHistoryModel } from 'app/models/entities/quest/QuestHistory';
 import { QuestApi } from 'app/services/api/quest-api';
 import { QuestHistoryApi } from 'app/services/api/quest-history-api';
+import { UpdateQuest } from 'app/models/entities/quest/UpdateQuestStatus';
 
 export const AuthStoreModel = types
   .model('Auth')
@@ -208,6 +209,18 @@ export const AuthStoreModel = types
       const transactionApi = new TransactionApi();
       try {
         yield transactionApi.createTransaction(self.accessToken ?? '', transactionData);
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
+    updateQuest: flow(function* (quest: UpdateQuest) {
+      const questHistoryApi = new QuestHistoryApi();
+      try {
+        yield questHistoryApi.saveOrUpdate(self.accessToken ?? '', [quest]);
+        self.getQuest();
+        self.getQuestHistory();
       } catch (e) {
         console.tron.log(e);
       }
