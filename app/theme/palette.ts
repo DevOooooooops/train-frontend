@@ -9,4 +9,4 @@ export const palette = {
   greyDarker: '#989FB3',
   white: '#ffffff',
   textClassicColor: '#0A1045',
-}
+};

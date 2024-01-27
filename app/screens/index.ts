@@ -1,9 +1,10 @@
-export * from "./Login/LoginScreen"
-export * from "./Registration/RegistrationScreen"
-export * from "./Budget/BudgetScreen"
-export * from "./DemoShowroomScreen/DemoCommunityScreen"
-export * from "./DemoShowroomScreen/DemoDebugScreen"
-export * from "./DemoShowroomScreen/DemoShowroomScreen"
-
-export * from "./ErrorScreen/ErrorBoundary"
+export * from './Budget/BudgetScreen';
+export * from './DemoShowroomScreen/DemoCommunityScreen';
+export * from './DemoShowroomScreen/DemoDebugScreen';
+export * from './DemoShowroomScreen/DemoShowroomScreen';
+export * from './Login/LoginScreen';
+export * from './Profile/Profile';
+export * from './Registration/RegistrationScreen';
 // export other screens here
+
+export * from './ErrorScreen/ErrorBoundary';

@@ -12,7 +12,7 @@ import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { useStores } from "app/models"
 
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+interface LoginScreenProps extends AppStackScreenProps<'Login'> {}
 
 interface LoginData {
   username: string;
@@ -41,14 +41,29 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         source={require('assets/images/authentication.png')}
         resizeMode='stretch'
         resizeMethod='auto'
-        style={{height: '100%', width: '100%', position: 'absolute' }}
+        style={{ height: '100%', width: '100%', position: 'absolute' }}
       />
-      <View style={{ height: 170, width: '100%', alignItems: 'center',justifyContent: 'flex-end'}}>
-        <CQText style={{fontSize: 50, color: palette.black, fontWeight: 'bold'}} text={"Sign In"}></CQText>
+      <View style={{ height: 170, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
+        <CQText style={{ fontSize: 50, color: palette.black, fontWeight: 'bold' }} text={'Sign In'}></CQText>
       </View>
-      <View style={{ height: 200, width: '100%', backgroundColor: palette.white, alignItems: 'center', marginTop: 150}}>
-        <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
-          <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
+      <View
+        style={{
+          height: 200,
+          width: '100%',
+          backgroundColor: palette.white,
+          alignItems: 'center',
+          marginTop: 150,
+        }}
+      >
+        <View
+          style={{
+            marginVertical: 10,
+            width: '70%',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+        >
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
             <FontAwesomeIcon name='user-o' size={33} color={palette.deepPink} />
           </View>
           <Controller
@@ -56,19 +71,19 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             name='username'
             defaultValue=''
             render={({ field: { onChange, value } }) => (
-              <InputField
-                text={'Username'}
-                error={!!errors.username}
-                value={value}
-                onChange={onChange}
-                backgroundColor={palette.white}
-                width={250}
-              />
+              <InputField text={'Username'} error={!!errors.username} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>
-        <View style={{marginVertical: 10, width: '70%', flexDirection: 'row', justifyContent: 'center'}}>
-          <View style={{flex: 1,  justifyContent: 'flex-end', alignItems: 'center'}}>
+        <View
+          style={{
+            marginVertical: 10,
+            width: '70%',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+        >
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
             <IoniconIcon name='lock-closed-outline' size={35} color={palette.deepPink} />
           </View>
           <Controller
@@ -76,18 +91,11 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             name='password'
             defaultValue=''
             render={({ field: { onChange, value } }) => (
-              <InputField
-                text={'Password'}
-                error={!!errors.password}
-                value={value}
-                onChange={onChange}
-                backgroundColor={palette.white}
-                width={250}
-              />
+              <InputField text={'Password'} error={!!errors.password} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>
-        <View style={{width: '100%', justifyContent: 'center', alignItems: 'flex-end'}}>
+        <View style={{ width: '100%', justifyContent: 'center', alignItems: 'flex-end' }}>
           <TouchableOpacity
             style={{
               width: 200,
@@ -95,7 +103,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
               borderRadius: 5,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginRight: 50
+              marginRight: 50,
             }}
             onPress={() => navigate('Registration')}
           >
@@ -107,10 +115,17 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
               }}
               text={"Don't have an account? "}
             />
-
           </TouchableOpacity>
         </View>
-        <View style={{marginVertical: 20, width: '100%', height: 50, justifyContent: 'center', alignItems: 'center'}}>
+        <View
+          style={{
+            marginVertical: 20,
+            width: '100%',
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <TouchableOpacity
             style={{
               backgroundColor: palette.deepPink,
@@ -134,7 +149,17 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{width: '100%', height: 100, position: 'absolute', bottom: 0, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+      <View
+        style={{
+          width: '100%',
+          height: 100,
+          position: 'absolute',
+          bottom: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}
+      >
         <CQText
           style={{
             color: palette.black,
@@ -146,9 +171,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
           source={require('assets/images/cash-quest-logo.png')}
           resizeMode='stretch'
           resizeMethod='auto'
-          style={{height: 50, width: 50, marginLeft: 10 }}
+          style={{ height: 50, width: 50, marginLeft: 10 }}
         />
       </View>
     </ErrorBoundary>
-  )
-})
+  );
+});
