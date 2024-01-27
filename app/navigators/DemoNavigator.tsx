@@ -10,6 +10,7 @@ import { DemoCommunityScreen, DemoDebugScreen, TransactionScreen } from '../scre
 import { colors, spacing, typography } from '../theme';
 import { AppStackParamList, AppStackScreenProps } from './AppNavigator';
 import FrontAwesome from 'react-native-vector-icons/FontAwesome';
+import { palette } from "app/theme/palette"
 
 export type DemoTabParamList = {
   Home: undefined;
@@ -40,7 +41,7 @@ export function DemoNavigator() {
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: [$tabBar, { height: bottom + 70 }],
-        tabBarActiveTintColor: colors.text,
+        tabBarActiveTintColor: palette.deepPink,
         tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,

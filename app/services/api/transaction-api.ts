@@ -1,14 +1,25 @@
 import { Transaction } from 'app/models/entities/transaction/transaction';
-import { ApiResult } from 'app/services/api/api.types';
+import { GetTransactionResult } from "app/services/api/api.types"
 import { apiBase } from './base';
 
 export class TransactionApi {
-  async getAll(token: string): ApiResult<Transaction[]> {
-    const { data } = await apiBase.get<Transaction[]>('/transactions', {
+  async getTransactions(token: string): Promise<GetTransactionResult> {
+    const response = await apiBase.get('user/transactions', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { data };
+    const transaction = response.data
+    return { transaction: transaction } ;
+  }
+
+  async createTransaction(token: string, transactionData: Transaction): Promise<GetTransactionResult> {
+    const response = await apiBase.put(`user/transactions/${transactionData.id}`, transactionData,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const transaction = response.data
+    return { transaction: transaction } ;
   }
 }

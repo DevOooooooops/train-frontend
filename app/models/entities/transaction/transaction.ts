@@ -10,7 +10,7 @@ export const TransactionModel = types.model('TransactionStore').props({
   type: types.maybeNull(types.enumeration(Object.values(TransactionType))),
   amount: types.maybeNull(types.number),
   reason: types.maybeNull(types.string),
-  creationDateTime: types.maybeNull(types.string),
+  creationDatetime: types.maybeNull(types.string),
 });
 
 export interface Transaction extends Instance<typeof TransactionModel> {}

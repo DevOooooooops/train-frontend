@@ -42,6 +42,11 @@ export const AuthStoreModel = types
     logout: flow(function* () {
       self.reset();
     }),
+  }))
+  .actions(self => ({
+    setTransactions(transactions: Transaction[]) {
+      self.transactions.replace(transactions);
+    },
   })).actions(self => ({
     signUp: flow(function* (birthdate: string, username: string, password: string) {
       const signUpApi = new AuthApi();
@@ -92,22 +97,74 @@ export const AuthStoreModel = types
           level: getUserResult.account.level,
           balance: getUserResult.account.balance
         })
+        const transactionApi = new TransactionApi();
+        const getTransactionResult = yield transactionApi.getTransactions(self.accessToken || '');
+        try {
+          self.setTransactions(getTransactionResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
       } catch (e) {
         console.tron.log(e);
       }
     }),
   }))
   .actions(self => ({
-    sesTransactions(transactions: Transaction[]) {
-      self.transactions.replace(transactions);
-    },
+    getUser: flow(function* () {
+      const signUpApi = new AuthApi();
+      try {
+        const getUserResult = yield signUpApi.getUser(self.accessToken ?? '')
+        self.setAccount({
+          user:
+            {
+              id: getUserResult.account.user.id,
+              username: getUserResult.account.user.username,
+              birthDate: getUserResult.account.user.birthDate
+            },
+          income:
+            {
+              earningFrequency: getUserResult.account.income.earningFrequency,
+              amount: getUserResult.account.income.amount,
+              savingTarget: getUserResult.account.income.savingTarget
+            },
+          level: getUserResult.account.level,
+          balance: getUserResult.account.balance
+        })
+        const transactionApi = new TransactionApi();
+        const getTransactionResult = yield transactionApi.getTransactions(self.accessToken || '');
+        try {
+          self.setTransactions(getTransactionResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
   }))
   .actions(self => ({
-    getTransaction: flow(function* (username: string, password: string) {
+    getTransaction: flow(function* () {
       const transactionApi = new TransactionApi();
       try {
-        const getTokenResult = yield transactionApi.getAll(self.accessToken || '');
-        self.sesTransactions(getTokenResult.data);
+        const getTokenResult = yield transactionApi.getTransactions(self.accessToken || '');
+        try {
+          self.setTransactions(getTokenResult.transaction);
+        }catch (e) {
+          // @ts-ignore
+          console.tron.log(e.message)
+        }
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
+    createTransaction: flow(function* (transactionData: Transaction) {
+      const transactionApi = new TransactionApi();
+      try {
+        yield transactionApi.createTransaction(self.accessToken ?? '', transactionData);
       } catch (e) {
         console.tron.log(e);
       }

@@ -9,5 +9,7 @@ export const palette = {
   greyDarker: '#989FB3',
   white: '#ffffff',
   textClassicColor: '#0A1045',
+  lightGrey: '#939AA4',
+  lighterGrey: '#CDD4DA',
   green: '#65B741',
 };

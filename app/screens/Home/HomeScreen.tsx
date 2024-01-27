@@ -1,8 +1,8 @@
 import { CQText } from 'app/components/Text/CQText';
-import { AppStackScreenProps, navigate } from 'app/navigators';
+import { AppStackScreenProps, navigate } from "app/navigators"
 import { ErrorBoundary } from 'app/screens';
 import { palette } from 'app/theme/palette';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from "react"
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -39,9 +39,13 @@ interface HomeScreenProps extends AppStackScreenProps<'Home'> {}
 
 export const HomeScreen: FC<HomeScreenProps> = _props => {
   const gotToProfile = () => navigate('Profile');
-  const {
-    authStore: { currentAccount, currentUser },
-  } = useStores();
+  const { authStore } = useStores();
+  const {currentUser, currentAccount} = authStore
+  useEffect(() => {
+    (async () => {
+      await authStore.getUser()
+    })();
+  }, [])
 
   return (
     <ErrorBoundary catchErrors='always'>
@@ -63,7 +67,7 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
               <CQText style={BALANCE_TEXT} text={'Your current balance'}></CQText>
             </View>
             <View style={BALANCE_CARD_VALUE_CONTAINER}>
-              <CQText style={BALANCE_VALUE} text={`$ ${currentAccount?.balance || '00.00'}`}></CQText>
+              <CQText style={BALANCE_VALUE} text={`$ ${currentAccount?.balance ?? '00.00'}`}></CQText>
               <TouchableOpacity>
                 <IonIcon name='eye-off-outline' size={20} color='#fff' />
               </TouchableOpacity>
@@ -71,13 +75,13 @@ export const HomeScreen: FC<HomeScreenProps> = _props => {
           </View>
           <View style={ICON_BUTTON_CONTAINER}>
             <View>
-              <TouchableOpacity style={ICON_BUTTON}>
+              <TouchableOpacity style={ICON_BUTTON} onPress={() => navigate('TransactionCreation', {type: 'INCOME'})}>
                 <IonIcon name='arrow-up' size={20} color={palette.deepPink} />
               </TouchableOpacity>
               <CQText style={BALANCE_TEXT} text={'Deposit'}></CQText>
             </View>
             <View>
-              <TouchableOpacity style={ICON_BUTTON}>
+              <TouchableOpacity style={ICON_BUTTON} onPress={() => navigate('TransactionCreation', {type: 'OUTCOME'})}>
                 <IonIcon name='arrow-down' size={20} color={palette.deepPink} />
               </TouchableOpacity>
               <CQText style={BALANCE_TEXT} text={'Withdraw'}></CQText>
