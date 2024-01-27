@@ -11,7 +11,7 @@ export const RootStoreModel = types.model('RootStore').props({
   authenticationStore: types.optional(AuthenticationStoreModel, {}),
   episodeStore: types.optional(EpisodeStoreModel, {}),
   authStore: types.optional(AuthStoreModel, {}),
-  transactionStore: types.optional(TransactionModel, {}),
+  transactionStore: types.optional(types.array(TransactionModel), []),
 });
 
 /**
