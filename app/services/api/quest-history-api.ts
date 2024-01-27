@@ -4,7 +4,7 @@ import { GetQuestHistoryResult } from 'app/services/api/api.types';
 import { apiBase } from './base';
 
 export class QuestHistoryApi {
-  async getAll(token: string, userId: number): Promise<GetQuestHistoryResult> {
+  async getAll(token: string, userId: string): Promise<GetQuestHistoryResult> {
     const { data: questHistories } = await apiBase.get<QuestHistory[]>(`/user/${userId}/quest/history`, {
       headers: {
         Authorization: `Bearer ${token}`,
