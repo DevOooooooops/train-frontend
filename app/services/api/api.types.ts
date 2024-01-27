@@ -1,5 +1,6 @@
 import { GeneralApiProblem } from 'app/services/api/apiProblem';
 import { Account, User } from 'app/models/entities/user/user';
+import { Transaction } from "app/models/entities/transaction/transaction"
 
 /**
  * These types indicate the shape of the data you expect to receive from your
@@ -57,5 +58,7 @@ export type GetTokenResult = { accessToken: string } | GeneralApiProblem;
 export type GetWhoAmIResult = { user: User } | GeneralApiProblem;
 
 export type GetUserResult = { account: Account } | GeneralApiProblem;
+
+export type GetTransactionResult = {transaction: Transaction[] } | GeneralApiProblem;
 
 export type ApiResult<T> = Promise<{ data: T } | GeneralApiProblem>;

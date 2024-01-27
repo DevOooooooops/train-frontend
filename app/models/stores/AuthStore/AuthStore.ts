@@ -98,16 +98,26 @@ export const AuthStoreModel = types
     }),
   }))
   .actions(self => ({
-    sesTransactions(transactions: Transaction[]) {
+    setTransactions(transactions: Transaction[]) {
       self.transactions.replace(transactions);
     },
   }))
   .actions(self => ({
-    getTransaction: flow(function* (username: string, password: string) {
+    getTransaction: flow(function* () {
       const transactionApi = new TransactionApi();
       try {
-        const getTokenResult = yield transactionApi.getAll(self.accessToken || '');
-        self.sesTransactions(getTokenResult.data);
+        const getTokenResult = yield transactionApi.getTransactions(self.accessToken || '');
+        self.setTransactions(getTokenResult.transaction);
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  }))
+  .actions(self => ({
+    createTransaction: flow(function* (transactionData: Transaction) {
+      const transactionApi = new TransactionApi();
+      try {
+        yield transactionApi.createTransaction(self.accessToken ?? '', transactionData);
       } catch (e) {
         console.tron.log(e);
       }

@@ -11,6 +11,7 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"
 import { InputField } from "app/components/InputField/InputField"
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { useRoute } from "@react-navigation/native"
+import UUIDGenerator from 'react-native-uuid';
 
 interface TransactionData {
   amount: string;
@@ -23,9 +24,7 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
   const routes = useRoute()
   // @ts-ignore
   const { type } = routes?.params || {};
-  const {
-    authStore: { currentAccount, currentUser },
-  } = useStores();
+  const { authStore } = useStores();
 
   const {
     handleSubmit,
@@ -41,7 +40,15 @@ export const TransactionCreationScreen: FC<TransactionCreationScreenProps> = _pr
   }, [])
 
   const onSubmit = async (transactionalData: TransactionData) => {
-    //await authStore.login(loginData.username, loginData.password);
+    const item = {
+      id: UUIDGenerator.v4().toString(),
+      reason: transactionalData.reason,
+      amount: parseInt(transactionalData.amount, 10),
+      type: type,
+      creationDatetime: new Date().toISOString()
+    }
+    await authStore.createTransaction(item)
+    await authStore.getTransaction()
   };
 
   return (
