@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
-import React, { FC, useState } from "react"
+import React, { FC, /*useState*/ } from "react"
 import { TouchableOpacity, View } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
+import { AppStackScreenProps, navigate } from "app/navigators"
 import { CQImage } from "app/components/AutoImage/CQImage"
 import { ErrorBoundary } from "app/screens"
 import { CQText } from "app/components/Text/CQText"
@@ -9,7 +9,7 @@ import { palette } from "app/theme/palette"
 import { InputField } from "app/components/InputField/InputField"
 import { Controller, useForm } from "react-hook-form"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { RadioButton } from 'react-native-paper';
+import { useStores } from "app/models"
 
 interface BudgetScreenProps extends AppStackScreenProps<"Budget"> {}
 
@@ -18,6 +18,7 @@ interface BudgetData {
 }
 
 export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScreen(_props) {
+  const {authStore: {currentUser, updateInfos}} = useStores();
   const {
     handleSubmit,
     control,
@@ -27,12 +28,29 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
     defaultValues: { amount: '' },
   });
 
-  const [currentChecked, setCurrentChecked] = useState(0);
+  // const [currentChecked, setCurrentChecked] = useState(0);
 
-  const onSubmit = (budgetData: BudgetData) => {
-    console.tron.log(
-      {amount: budgetData.amount}
-    )
+  const onSubmit = async(budgetData: BudgetData) => {
+    await updateInfos({
+      user: {
+        id: currentUser?.id,
+        username: currentUser?.username,
+        birthDate: currentUser?.birthDate
+      },
+      profile: {
+        first_name: 'Liana',
+        last_name: 'Finaritra',
+        sex: "M",
+      },
+      income: {
+        earningFrequency: "DAILY",
+        amount: parseInt(budgetData.amount, 10),
+        savingTarget: 1
+      },
+      level: 0,
+      balance: 0
+    })
+    navigate('Home');
   }
 
   return (
@@ -74,11 +92,18 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
           />
         </View>
         <View style={{width: '100%', height: 50, marginTop: 10, flexDirection: 'row'}}>
-          <View style={{width: '30%', height: '100%',marginHorizontal: '1.5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+          {/*<View style={{
+            width: "30%",
+            height: "100%",
+            marginHorizontal: "1.5%",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}>
             <RadioButton.Android
               value="first"
-              status={ currentChecked === 0 ? 'checked': 'unchecked' }
-              onPress={()=> setCurrentChecked(0)}
+              status={currentChecked === 0 ? "checked" : "unchecked"}
+              onPress={() => setCurrentChecked(0)}
               color={palette.deepPink}
             />
             <CQText
@@ -86,14 +111,21 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
                 color: palette.black,
                 fontSize: 16,
               }}
-              text={'Daily'}
+              text={"Daily"}
             />
-          </View>
-          <View style={{width: '30%', height: '100%',marginHorizontal: '2%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+          </View>*/}
+          {/*<View style={{
+            width: "30%",
+            height: "100%",
+            marginHorizontal: "2%",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}>
             <RadioButton.Android
               value="second"
-              status={ currentChecked === 1 ? 'checked': 'unchecked' }
-              onPress={()=> setCurrentChecked(1)}
+              status={currentChecked === 1 ? "checked" : "unchecked"}
+              onPress={() => setCurrentChecked(1)}
               color={palette.deepPink}
             />
             <CQText
@@ -101,14 +133,21 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
                 color: palette.black,
                 fontSize: 16,
               }}
-              text={'Weekly'}
+              text={"Weekly"}
             />
-          </View>
-          <View style={{width: '30%', height: '100%',marginHorizontal: '1.5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+          </View>*/}
+          {/*<View style={{
+            width: "30%",
+            height: "100%",
+            marginHorizontal: "1.5%",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}>
             <RadioButton.Android
               value="third"
-              status={ currentChecked === 2 ? 'checked': 'unchecked' }
-              onPress={()=> setCurrentChecked(2)}
+              status={currentChecked === 2 ? "checked" : "unchecked"}
+              onPress={() => setCurrentChecked(2)}
               color={palette.deepPink}
             />
             <CQText
@@ -116,10 +155,10 @@ export const BudgetScreen: FC<BudgetScreenProps> = observer(function BudgetScree
                 color: palette.black,
                 fontSize: 16,
               }}
-              text={'Monthly'}
+              text={"Monthly"}
             />
-          </View>
-        </View>
+          </View>*/}
+      </View>
         <View style={{marginVertical: 20, width: '100%', height: 50, justifyContent: 'center', alignItems: 'center'}}>
           <TouchableOpacity
             style={{

@@ -44,12 +44,22 @@ export const AuthStoreModel = types
       const signUpApi = new AuthApi();
       try {
         const payload = {
-          birthdate: birthdate,
+          birthDate: birthdate,
           username: username,
           password: password,
         }
         const getTokenResult = yield signUpApi.signUp(payload)
         self.setUser(getTokenResult.user)
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  })).actions(self => ({
+    updateInfos: flow(function* (payload: any) {
+      const signUpApi = new AuthApi();
+      try {
+        const getAccountResult = yield signUpApi.updateUser(payload, self.accessToken ?? '')
+        self.setAccount(getAccountResult.account)
       } catch (e) {
         console.tron.log(e);
       }
@@ -61,14 +71,14 @@ export const AuthStoreModel = types
         const getTokenResult = yield signInApi.getToken(username, password)
         self.setAccessToken(getTokenResult.accessToken)
         const getWhoAmIResult = yield signInApi.whoami(getTokenResult.accessToken);
-        self.setUser({id: getWhoAmIResult.user.id, username: getWhoAmIResult.user.username, password: getWhoAmIResult.user.password})
+        self.setUser({id: getWhoAmIResult.user.id, username: getWhoAmIResult.user.username, birthDate: getWhoAmIResult.user.birthDate})
         const getUserResult = yield signInApi.getUser(getTokenResult.accessToken);
         self.setAccount({
           user:
             {
               id: getUserResult.account.user.id,
               username: getUserResult.account.user.username,
-              password: getUserResult.account.user.password
+              birthDate: getUserResult.account.user.birthDate
             },
           income:
             {

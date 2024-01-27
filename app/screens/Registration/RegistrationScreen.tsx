@@ -18,7 +18,7 @@ interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 interface RegistrationData {
   username: string;
   password: string;
-  birthdate: string;
+  birthDate: string;
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
@@ -29,11 +29,11 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
     formState: { errors },
   } = useForm<RegistrationData>({
     mode: 'all',
-    defaultValues: { username: '', password: '', birthdate: '' },
+    defaultValues: { username: '', password: '', birthDate: '' },
   });
 
   const onSubmit = async (registrationData: RegistrationData) => {
-    const [day, month, year] = registrationData.birthdate.split('/');
+    const [day, month, year] = registrationData.birthDate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
     await signUp(formattedDate, registrationData.username, registrationData.password)
     await login(registrationData.username, registrationData.password)
@@ -105,7 +105,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
           </View>
           <Controller
             control={control}
-            name='birthdate'
+            name='birthDate'
             rules={{
               pattern: {
                 value: /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/,
@@ -113,7 +113,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <InputField text={'Birthdate'} error={!!errors.birthdate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+              <InputField text={'Birthdate'} error={!!errors.birthDate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
             )}
           />
         </View>
