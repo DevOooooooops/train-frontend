@@ -11,6 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import { useStores } from "app/models"
 
 interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 
@@ -21,6 +22,7 @@ interface RegistrationData {
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
+  const {authStore: {signUp}} = useStores();
   const {
     handleSubmit,
     control,
@@ -30,14 +32,11 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
     defaultValues: { username: '', password: '', birthdate: '' },
   });
 
-  const onSubmit = (registrationData: RegistrationData) => {
+  const onSubmit = async (registrationData: RegistrationData) => {
     const [day, month, year] = registrationData.birthdate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
-    console.tron.log({
-      username: registrationData.username,
-      password: registrationData.password,
-      birthdate: formattedDate
-    })
+    await signUp(formattedDate, registrationData.username, registrationData.password)
+    navigate('Budget');
   }
 
   return (

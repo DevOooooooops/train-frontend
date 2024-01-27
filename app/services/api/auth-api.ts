@@ -35,5 +35,11 @@ export class AuthApi {
     const account = response.data
     return { account: account } ;
   }
+
+  async signUp(payload: any): Promise<GetWhoAmIResult> {
+    const response = await apiBase.post('user', payload);
+    const user = response.data
+    return { user: user } ;
+  }
   //async registration(payload: any): Promise<>
 }

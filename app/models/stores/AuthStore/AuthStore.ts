@@ -40,6 +40,21 @@ export const AuthStoreModel = types
       self.reset();
     }),
   })).actions(self => ({
+    signUp: flow(function* (birthdate: string, username: string, password: string) {
+      const signUpApi = new AuthApi();
+      try {
+        const payload = {
+          birthdate: birthdate,
+          username: username,
+          password: password,
+        }
+        const getTokenResult = yield signUpApi.signUp(payload)
+        self.setUser(getTokenResult.user)
+      } catch (e) {
+        console.tron.log(e);
+      }
+    }),
+  })).actions(self => ({
     login: flow(function* (username: string, password: string) {
       const signInApi = new AuthApi();
       try {
@@ -51,9 +66,9 @@ export const AuthStoreModel = types
         self.setAccount({
           user:
             {
-              id: getUserResult.user.id,
-              username: getUserResult.user.username,
-              password: getUserResult.user.password
+              id: getUserResult.account.id,
+              username: getUserResult.account.username,
+              password: getUserResult.account.password
             },
           income:
             {
