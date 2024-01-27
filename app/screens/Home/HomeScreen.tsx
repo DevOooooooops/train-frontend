@@ -1,5 +1,5 @@
 import { CQText } from 'app/components/Text/CQText';
-import { AppStackScreenProps } from 'app/navigators';
+import { AppStackScreenProps, navigate } from 'app/navigators';
 import { ErrorBoundary } from 'app/screens';
 import { palette } from 'app/theme/palette';
 import React, { FC } from 'react';
@@ -33,6 +33,8 @@ import {
 interface HomeScreenProps extends AppStackScreenProps<'Home'> {}
 
 export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
+  const gotToProfile = () => navigate('Profile');
+
   return (
     <ErrorBoundary catchErrors='always'>
       <View>
@@ -42,7 +44,7 @@ export const HomeScreen: FC<HomeScreenProps> = function HomeScreen(_props) {
             <CQText style={HEADER_SUB_NAME} text={'To be the best...'}></CQText>
             <CQText style={HEADER_NAME} text={'John Doe'}></CQText>
           </View>
-          <TouchableOpacity style={HEADER_PROFILE_BUTTON}>
+          <TouchableOpacity onPress={gotToProfile} style={HEADER_PROFILE_BUTTON}>
             <IonIcon name='chevron-forward-sharp' size={20} />
           </TouchableOpacity>
         </View>
