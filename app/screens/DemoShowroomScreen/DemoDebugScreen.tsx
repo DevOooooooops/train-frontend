@@ -16,30 +16,12 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
 ) {
   const {
     authenticationStore: { logout },
+    authStore
   } = useStores()
 
   const usingHermes = typeof HermesInternal === "object" && HermesInternal !== null
   // @ts-expect-error
   const usingFabric = global.nativeFabricUIManager != null
-
-  const demoReactotron = React.useMemo(
-    () => async () => {
-      if (__DEV__) {
-        console.tron.display({
-          name: "DISPLAY",
-          value: {
-            appId: Application.applicationId,
-            appName: Application.applicationName,
-            appVersion: Application.nativeApplicationVersion,
-            appBuildVersion: Application.nativeBuildVersion,
-            hermesEnabled: usingHermes,
-          },
-          important: true,
-        })
-      }
-    },
-    [],
-  )
 
   return (
     <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={$container}>
@@ -100,7 +82,7 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
         />
       </View>
       <View style={$buttonContainer}>
-        <Button style={$button} tx="demoDebugScreen.reactotron" onPress={demoReactotron} />
+        <Button style={$button} tx="demoDebugScreen.reactotron" onPress={() => authStore.logout()} />
         <Text style={$hint} tx={`demoDebugScreen.${Platform.OS}ReactotronHint` as const} />
       </View>
       <View style={$buttonContainer}>

@@ -36,6 +36,7 @@ export const InputField = ({
         selectionColor={palette.deepPink}
         value={value}
         onChangeText={onChange}
+        error={error}
         right={
           rightRender && (
             <TextInput.Affix

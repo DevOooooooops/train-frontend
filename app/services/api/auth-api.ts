@@ -1,5 +1,6 @@
-import { GetTokenResult, GetWhoAmIResult } from 'app/services/api/api.types';
+
 import { apiBase } from './base';
+import { GetTokenResult, GetUserResult, GetWhoAmIResult } from "app/services/api/api.types"
 
 interface getTokenData {
   data: {
@@ -18,7 +19,7 @@ export class AuthApi {
   }
 
   async whoami(token: string): Promise<GetWhoAmIResult> {
-    const response = await apiBase.get('/whoami', {
+    const response = await apiBase.get('whoami', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,4 +27,13 @@ export class AuthApi {
     const user = response.data;
     return { user: user };
   }
+
+  async getUser(token: string): Promise<GetUserResult> {
+    const response = await apiBase.get('user', {headers: {
+        'Authorization': `Bearer ${token}`
+      }});
+    const account = response.data
+    return { account: account } ;
+  }
+  //async registration(payload: any): Promise<>
 }

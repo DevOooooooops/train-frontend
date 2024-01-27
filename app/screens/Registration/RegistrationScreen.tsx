@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import React, { FC } from "react"
 import { TouchableOpacity, View } from 'react-native';
 import { AppStackScreenProps, navigate } from 'app/navigators';
 import { CQImage } from 'app/components/AutoImage/CQImage';
@@ -11,24 +11,34 @@ import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import { DatePickerField } from 'app/components/DatePicker/DatePicker';
 
 interface RegistrationScreenProps extends AppStackScreenProps<'Registration'> {}
 
 interface RegistrationData {
   username: string;
   password: string;
-  birthdate: Date;
+  birthdate: string;
 }
 
 export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function RegistrationScreen(_props) {
   const {
+    handleSubmit,
     control,
     formState: { errors },
   } = useForm<RegistrationData>({
     mode: 'all',
-    defaultValues: { username: '', password: '', birthdate: new Date() },
+    defaultValues: { username: '', password: '', birthdate: '' },
   });
+
+  const onSubmit = (registrationData: RegistrationData) => {
+    const [day, month, year] = registrationData.birthdate.split('/');
+    const formattedDate = `${year}-${month}-${day}`;
+    console.tron.log({
+      username: registrationData.username,
+      password: registrationData.password,
+      birthdate: formattedDate
+    })
+  }
 
   return (
     <ErrorBoundary catchErrors='always'>
@@ -94,31 +104,17 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
             <AntDesignIcon name='calendar' size={35} color={palette.deepPink} />
           </View>
           <Controller
-            name='birthdate'
             control={control}
-            render={({ field: { value, onChange } }) => {
-              return (
-                <DatePickerField
-                  labelText='Birthdate'
-                  isButtonPreset={false}
-                  labelStyle={{ color: palette.greyDarker }}
-                  containerStyle={{
-                    padding: 20,
-                    backgroundColor: palette.white,
-                    borderColor: '#E1E5EF',
-                    borderWidth: 1,
-                  }}
-                  textStyle={{
-                    color: palette.textClassicColor,
-                    marginTop: 20,
-                  }}
-                  dateSeparator='/'
-                  value={value}
-                  onDateChange={onChange}
-                  type={'date'}
-                />
-              );
+            name='birthdate'
+            rules={{
+              pattern: {
+                value: /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/,
+                message: 'Invalid birthdate',
+              },
             }}
+            render={({ field: { onChange, value } }) => (
+              <InputField text={'Birthdate'} error={!!errors.birthdate} value={value} onChange={onChange} backgroundColor={palette.white} width={250} />
+            )}
           />
         </View>
         <View style={{ width: '100%', justifyContent: 'center', alignItems: 'flex-end' }}>
@@ -161,7 +157,7 @@ export const RegistrationScreen: FC<RegistrationScreenProps> = observer(function
               justifyContent: 'center',
               flexDirection: 'row',
             }}
-            onPress={() => navigate('Budget')}
+            onPress={handleSubmit(onSubmit)}
           >
             <View style={{ justifyContent: 'center' }}>
               <CQText
