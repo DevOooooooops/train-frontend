@@ -1,23 +1,22 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
+import { HomeScreen } from 'app/screens/Home/HomeScreen';
 import React from 'react';
 import { TextStyle, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from '../components';
 import { translate } from '../i18n';
-import { DemoCommunityScreen, DemoDebugScreen } from '../screens';
-import { DemoPodcastListScreen } from '../screens/DemoShowroomScreen/DemoPodcastListScreen';
+import { DemoCommunityScreen, DemoDebugScreen, TransactionScreen } from '../screens';
 import { colors, spacing, typography } from '../theme';
 import { AppStackParamList, AppStackScreenProps } from './AppNavigator';
-import { HomeScreen } from 'app/screens/Home/HomeScreen';
+import FrontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export type DemoTabParamList = {
   Home: undefined;
-  Profile: undefined;
+  Transaction: undefined;
   DemoCommunity: undefined;
   DemoShowroom: { queryIndex?: string; itemIndex?: string };
   DemoDebug: undefined;
-  DemoPodcastList: undefined;
 };
 
 /**
@@ -66,12 +65,12 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name='DemoPodcastList'
-        component={DemoPodcastListScreen}
+        name='Transaction'
+        component={TransactionScreen}
         options={{
-          tabBarAccessibilityLabel: translate('demoNavigator.podcastListTab'),
-          tabBarLabel: translate('demoNavigator.podcastListTab'),
-          tabBarIcon: ({ focused }) => <Icon icon='podcast' color={focused ? colors.tint : undefined} size={30} />,
+          tabBarAccessibilityLabel: 'Transaction',
+          tabBarLabel: 'Transaction',
+          tabBarIcon: ({ focused }) => <FrontAwesome name='money' color={focused ? colors.tint : undefined} size={30} />,
         }}
       />
 

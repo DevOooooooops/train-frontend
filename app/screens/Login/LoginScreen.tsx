@@ -1,16 +1,16 @@
-import { observer } from "mobx-react-lite"
-import React, { FC } from "react"
-import { TouchableOpacity, View } from "react-native"
-import { AppStackScreenProps, navigate } from "app/navigators"
-import { CQImage } from "app/components/AutoImage/CQImage"
-import { ErrorBoundary } from "app/screens"
-import { CQText } from "app/components/Text/CQText"
-import { palette } from "app/theme/palette"
-import { InputField } from "app/components/InputField/InputField"
-import { Controller, useForm } from "react-hook-form"
+import { observer } from 'mobx-react-lite';
+import React, { FC } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { AppStackScreenProps, navigate } from 'app/navigators';
+import { CQImage } from 'app/components/AutoImage/CQImage';
+import { ErrorBoundary } from 'app/screens';
+import { CQText } from 'app/components/Text/CQText';
+import { palette } from 'app/theme/palette';
+import { InputField } from 'app/components/InputField/InputField';
+import { Controller, useForm } from 'react-hook-form';
 import IoniconIcon from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { useStores } from "app/models"
+import { useStores } from 'app/models';
 
 interface LoginScreenProps extends AppStackScreenProps<'Login'> {}
 
@@ -20,7 +20,7 @@ interface LoginData {
 }
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
-  const {authStore} = useStores();
+  const { authStore } = useStores();
   const {
     handleSubmit,
     control,
@@ -31,9 +31,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   });
 
   const onSubmit = async (loginData: LoginData) => {
-    console.tron.log(loginData)
-    await authStore.login(loginData.username, loginData.password)
-  }
+    console.tron.log(loginData);
+    await authStore.login(loginData.username, loginData.password);
+  };
 
   return (
     <ErrorBoundary catchErrors='always'>
